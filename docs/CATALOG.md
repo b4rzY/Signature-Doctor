@@ -2,6 +2,8 @@
 
 A catalog is a versioned JSON document describing **how to find and validate** named addresses. Save recipes rather than absolute addresses from a previous attachment.
 
+Catalogs describe the inspected application and are independent of the scripting host's brand. `processName` is the target executable, not the loader or the process embedding AngelScript. Live access requires a compatible [host adapter](COMPATIBILITY.md).
+
 ## Document
 
 ```json
