@@ -12,9 +12,11 @@ async function fixture(t, options = {}) {
   const rootDir = await mkdtemp(path.join(import.meta.dirname, '.server-fixture-'));
   await mkdir(path.join(rootDir, 'public'));
   await mkdir(path.join(rootDir, 'shared'));
+  await mkdir(path.join(rootDir, 'examples'));
   await writeFile(path.join(rootDir, 'public', 'index.html'), '<!doctype html><h1>Doctor</h1>');
   await writeFile(path.join(rootDir, 'shared', 'example.mjs'), 'export const number = 42;');
   await writeFile(path.join(rootDir, 'private.json'), '{"private":true}');
+  await writeFile(path.join(rootDir, 'examples', 'angelscript-connect.as'), '// Portable connector fixture\nbool main() { return true; }\n');
   const app = createDoctorServer({ rootDir, port: 0, ...options });
   t.after(async () => { await app.close(); await rm(rootDir, { recursive: true, force: true }); });
   const bound = await app.start();
@@ -64,6 +66,11 @@ test('the dashboard serves static modules but blocks traversal, symlinks, cross-
   assert.equal((await fetch(`${url}/shared/example.mjs`)).status, 200);
   assert.equal((await fetch(`${url}/%2e%2e%2fprivate.json`)).status, 400);
   assert.equal((await fetch(`${url}/server/index.mjs`)).status, 404);
+  const connector = await fetch(`${url}/api/connector?path=private.json`);
+  assert.equal(connector.status, 200);
+  assert.match(connector.headers.get('content-type'), /^text\/plain/);
+  assert.equal(connector.headers.get('content-disposition'), 'attachment; filename="angelscript-connect.as"');
+  assert.match(await connector.text(), /Portable connector fixture/);
   if (process.platform !== 'win32') {
     await symlink(path.join(rootDir, 'private.json'), path.join(rootDir, 'public', 'escape.json'));
     assert.equal((await fetch(`${url}/escape.json`)).status, 404);
@@ -78,7 +85,7 @@ test('the dashboard serves static modules but blocks traversal, symlinks, cross-
   assert.equal((await rpc(url, { type: 'ping' })).status, 503);
 });
 
-test('concurrent callers with the same id receive the correct out-of-order Echo response', async (t) => {
+test('concurrent callers with the same id receive the correct out-of-order agent response', async (t) => {
   const { app, url } = await fixture(t);
   const socket = await agent(url);
   const observed = [];
@@ -106,6 +113,42 @@ test('a mismatched response cannot silently satisfy a request', async (t) => {
   socket.on('message', (data) => { const request = JSON.parse(data.toString()); socket.send(JSON.stringify({ type: 'modules_result', id: request.id, modules: [] })); });
   const result = await rpc(url, { type: 'ping' });
   assert.equal(result.status, 502); assert.equal(result.body.code, 'ProtocolError');
+});
+
+test('portable protocol metadata is negotiated without requiring it from legacy agents', async (t) => {
+  const { url } = await fixture(t);
+  const socket = await agent(url);
+  const capabilities = ['ping', 'modules', 'read', 'read_batch', 'sig_scan_ida', 'resolve_relative'];
+  socket.on('message', (data) => {
+    const request = JSON.parse(data.toString());
+    socket.send(JSON.stringify({ type: 'ping_result', id: request.id, attached: true, pid: 123, base: '0x123456789abcdef', protocol: 'signature-doctor/1', connector: 'portable-angelscript', capabilities }));
+  });
+  const ping = await rpc(url, { type: 'ping' });
+  assert.equal(ping.status, 200);
+  assert.equal(ping.body.base, '0x123456789abcdef');
+  const status = await (await fetch(`${url}/api/status`)).json();
+  assert.equal(status.protocol, 'signature-doctor/1');
+  assert.equal(status.connector, 'portable-angelscript');
+  assert.deepEqual(status.capabilities, capabilities);
+  assert.equal(status.version, '1.1.0');
+  assert.equal((await rpc(url, { type: 'disassemble', address: '0x1000', size: 16 })).status, 501);
+  const disconnected = once(socket, 'close'); socket.close(); await disconnected;
+  const legacy = await agent(url);
+  legacy.on('message', (data) => { const request = JSON.parse(data.toString()); legacy.send(JSON.stringify({ type: 'ping_result', id: request.id, attached: true, pid: 124, base: '0x140000000' })); });
+  assert.equal((await rpc(url, { type: 'ping' })).status, 200);
+  assert.equal((await (await fetch(`${url}/api/status`)).json()).protocol, null);
+});
+
+test('incompatible versions and incomplete portable capability sets fail explicitly', async (t) => {
+  const { url } = await fixture(t);
+  const socket = await agent(url);
+  let metadata = { protocol: 'signature-doctor/2', capabilities: [] };
+  socket.on('message', (data) => { const request = JSON.parse(data.toString()); socket.send(JSON.stringify({ type: 'ping_result', id: request.id, attached: true, ...metadata })); });
+  const version = await rpc(url, { type: 'ping' });
+  assert.equal(version.status, 502); assert.equal(version.body.code, 'IncompatibleProtocol');
+  metadata = { protocol: 'signature-doctor/1', capabilities: ['ping', 'read'] };
+  const incomplete = await rpc(url, { type: 'ping' });
+  assert.equal(incomplete.status, 502); assert.equal(incomplete.body.code, 'IncompatibleProtocol');
 });
 
 test('disconnect rejects in-flight work and a later agent can reconnect', async (t) => {
