@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join } from 'node:path';
 import { JSDOM } from 'jsdom';
+import { createDemoRpc } from '../shared/demo.mjs';
 
 // DOM interaction tests, not a substitute for real-browser layout verification.
 test('dashboard interaction flow keeps review, history, edits, and demo/live state consistent', async t => {
@@ -17,8 +18,11 @@ test('dashboard interaction flow keeps review, history, edits, and demo/live sta
   const nativeFetch = globalThis.fetch;
   const intervals=[];const downloads=[];
   for(const [name,value] of Object.entries({window,document:window.document,localStorage:window.localStorage,navigator:window.navigator,location:window.location,FormData:window.FormData})) Object.defineProperty(globalThis,name,{value,writable:true,configurable:true});
-  globalThis.fetch=async url=>{
-    if(url==='/api/status')return new Response(JSON.stringify({agentConnected:false,attached:null,mode:'direct',upstream:null,pendingRequests:0,version:'1.0.0'}),{status:200,headers:{'content-type':'application/json'}});
+  let runtimeConnected=false;
+  const simulatedRuntime=createDemoRpc('updated',{latencyMs:0});
+  globalThis.fetch=async (url,options)=>{
+    if(url==='/api/status')return new Response(JSON.stringify({agentConnected:runtimeConnected,attached:runtimeConnected,mode:'direct',upstream:null,pendingRequests:0,version:'1.1.0'}),{status:200,headers:{'content-type':'application/json'}});
+    if(url==='/api/rpc'&&runtimeConnected)return new Response(JSON.stringify(await simulatedRuntime(JSON.parse(options.body),options.signal)),{status:200,headers:{'content-type':'application/json'}});
     throw new Error(`Unexpected test request ${url}`);
   };
   globalThis.setInterval=(fn,ms)=>{const id=descriptors.setInterval.value(fn,ms);intervals.push(id);return id;};
@@ -98,16 +102,38 @@ test('dashboard interaction flow keeps review, history, edits, and demo/live sta
       assert.equal(storage().catalog.items.length,9);click('[data-action=close-dialog]');
     });
 
-    await t.test('live mode has isolated history and reports a disconnected Echo without fake results',async()=>{
+    await t.test('live mode has isolated history and reports a disconnected runtime without fake results',async()=>{
       click('[data-action=mode][data-mode=live]');
       assert.equal(q('[data-action=approve]').disabled,true);
       click('[data-action=scan]');await waitFor(()=>q('.inline-alert.error'),'live connection failure');
-      assert.match(q('.inline-alert.error').textContent,/Echo is offline/);
+      assert.match(q('.inline-alert.error').textContent,/runtime is offline/);
       assert.equal(storage().runs.filter(r=>r.mode==='live').length,0);
       click('[data-action=connect]');assert.equal(q('#dialog').open,true);
-      assert.match(q('#dialog').textContent,/process socket at a time/);
+      assert.match(q('#dialog').textContent,/examples\/angelscript-connect\.as/);
       click('[data-action=setup-proxy]');assert.match(q('#dialog').textContent,/WEB_MV_URL/);
       click('[data-action=close-dialog]');
+    });
+
+    await t.test('a compatible runtime completes the live review and AngelScript export flow',async()=>{
+      runtimeConnected=true;
+      click('[data-action=scan]');
+      await waitFor(()=>storage().runs.some(r=>r.mode==='live')&&!q('[data-action=cancel]'),'live check completion');
+      assert.match(q('.connection-pill').textContent,/Runtime connected/);
+      assert.equal(q('.inline-alert.error'),null);
+      click('[data-action=select][data-id=view-matrix]');click('[data-action=approve]');
+      click('[data-action=nav][data-tab=exports]');
+      assert.equal(q('[data-action=angelscript]').disabled,false);
+      const before=downloads.length;
+      click('[data-action=angelscript]');
+      await waitFor(()=>downloads.length>before,'live AngelScript download');
+      const artifact=downloads.at(-1);
+      assert.match(artifact.filename,/\.resolvers\.as$/);
+      const source=await (await nativeFetch(artifact.href)).text();
+      assert.match(source,/process::find_signatures/);
+      assert.match(source,/process::read_/);
+      assert.doesNotMatch(source,/process::open_socket|\bEch[o0]\b/i);
+      assert.equal(storage().runs.filter(r=>r.mode==='live').length,1);
+      assert.ok(storage().runs.some(r=>r.mode==='demo'));
     });
 
     await t.test('a new catalog starts empty in live mode and a new recipe can be saved',()=>{
