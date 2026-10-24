@@ -12,9 +12,9 @@ Signature Doctor separates editable definitions, sampled observations, and expli
 | `shared/demo.mjs` | Synthetic RPC target consumed by the same engine |
 | `shared/export.mjs` | Approval gates, reviewed manifests, generated AngelScript recipes |
 | Node server | Static application delivery and a bounded read-only RPC transport |
-| Echo / web-mv | Process attachment, memory access, module enumeration, and pattern operations |
+| Portable AngelScript adapter / existing relay | Translate the connector protocol into the host's process-inspection APIs |
 
-The application uses native ES modules in both Node and the browser. No transpilation or frontend build step is needed.
+The application uses native ES modules in both Node and the browser. No transpilation or frontend build step is needed. The AngelScript connector is the host-adaptation boundary; see [compatibility](COMPATIBILITY.md) for its required bindings. The language itself does not provide process access, WebSocket networking, or JSON.
 
 ## A check, from start to finish
 
@@ -23,20 +23,20 @@ sequenceDiagram
     participant UI as Dashboard
     participant Engine as Resolver engine
     participant Bridge as Local bridge
-    participant Echo as Echo process API
+    participant Host as AngelScript host adapter
     UI->>Engine: Catalog, baseline, mode, cancellation signal
     Engine->>Bridge: Ping and enumerate modules
-    Bridge->>Echo: Correlated read-only requests
-    Echo-->>Engine: Target identity and module list
+    Bridge->>Host: Correlated read-only requests
+    Host-->>Engine: Target identity and module list
     loop Each enabled catalog item
         Engine->>Bridge: Resolve, read and validate
-        Bridge->>Echo: Bounded request
-        Echo-->>Engine: Response with success or error
+        Bridge->>Host: Bounded request
+        Host-->>Engine: Response with success or error
         Engine-->>UI: Progress and item evidence
     end
     Engine->>Bridge: Recheck target and module identity
-    Bridge->>Echo: Ping and enumerate modules
-    Echo-->>Engine: Current identity
+    Bridge->>Host: Ping and enumerate modules
+    Host-->>Engine: Current identity
     alt Target identity unchanged
         Engine-->>UI: Completed report
     else Detached, replaced or changed modules
@@ -58,11 +58,13 @@ Comparison uses module-relative locations when stable module membership exists. 
 
 ### Direct mode
 
-Echo's `process::open_socket` connects to `/agent`. The server assigns its own request IDs, tracks pending callers, correlates responses, and rejects pending work on disconnect or timeout. Only one direct agent is accepted.
+The portable [`examples/angelscript-connect.as`](../examples/angelscript-connect.as) adapter connects to `/agent` through `ws::connect`. Its JSON handlers translate the bounded [connector protocol](PROTOCOL.md) into documented process reads, module queries, and signature scans. A built-in process-socket API is not required. The server assigns its own request IDs, tracks pending callers, correlates responses, and rejects pending work on disconnect or timeout. Only one direct agent is accepted.
+
+The adapter advertises `signature-doctor/1` and its read-only capabilities in ping replies. The server rejects incompatible advertised profiles; older agents without metadata retain the legacy response path. The connector serializes host operations behind a mutex, refreshes the actual attachment on ping, and requires an explicit reconnect after a disconnect.
 
 ### Existing-relay mode
 
-`WEB_MV_URL` selects an existing loopback HTTP RPC endpoint. The same read-only request gate remains in front of that endpoint. The application does not open a second Echo process socket in this mode.
+`WEB_MV_URL` selects an existing loopback HTTP RPC endpoint. The same read-only request gate remains in front of that endpoint. The direct adapter is not loaded in this mode; the existing relay retains its own runtime connection.
 
 ### Request boundaries
 
@@ -88,9 +90,9 @@ The exporter copies approved resolver recipes and observed evidence into JSON. I
 
 Each generated resolver starts with the current module base, performs its recipe, repeats all validation checks, and returns success plus the resolved address. A shared helper checks signed offset arithmetic. Relative displacements are read with a success-reporting signed read and cross-checked with the documented API helper.
 
-`sd_resolve_all()` clears published globals, stages every result, checks process/module liveness again, and only then publishes all addresses together. The standalone `main()` attaches using the current documented one-argument API. Consumers incorporating helpers into existing scripts should merge the entrypoint and rerun resolution after reattachment or target changes.
+`sd_resolve_all()` clears published globals, stages every result, checks process/module liveness again, and only then publishes all addresses together. The standalone `main()` attaches using the shared documented one-argument API. Consumers incorporating helpers into existing scripts should merge the entrypoint and rerun resolution after reattachment or target changes.
 
-Tests verify generation contracts and export gates. The repository does not contain an Echo host or AngelScript compiler, so runtime compilation and real-target correctness must be verified against the installed Echo version.
+Tests verify generation contracts and export gates. Host API registrations are separate from the AngelScript language. Generated code must be checked against the installed runtime; the current [compatibility and verification scope](COMPATIBILITY.md#verification-scope) distinguishes schema tests, any compiler checks, and unavailable live-host testing.
 
 ## Testing strategy
 
@@ -98,5 +100,6 @@ Tests verify generation contracts and export gates. The repository does not cont
 - Resolver tests use controlled memory responses to cover uniqueness, missing matches, pointer chains, rel32, zero versus failure, ASLR, definition changes, and target changes.
 - Export tests cover review eligibility, stale definitions, demo separation, exact numeric bounds, and generated validation behavior.
 - Transport tests use a synthetic WebSocket agent for multiplexing, disconnects, invalid requests, and origin/path boundaries.
+- The optional AngelScript 2.38.0 compiler/VM harness compiles and executes generated resolvers and portable-connector dispatch against both documented API-shaped stub profiles. It tests synthetic memory, arithmetic, validation, protocol, and teardown behavior.
 
-No automated test claims to establish live Echo compatibility. A real installation smoke check should connect the supplied script, verify the listed modules, resolve a known address, confirm an expected validation failure, and compile one small reviewed export.
+The real language compiler is exercised, but host implementations, native JSON parsing/serialization, real threads, networking, and process access are not supplied by the stubs. No automated test claims to establish live host compatibility. A real installation smoke check should connect the supplied script, verify the listed modules, resolve a known address, confirm an expected validation failure, and compile one small reviewed export.
