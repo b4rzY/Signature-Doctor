@@ -1,0 +1,284 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="1030" viewBox="0 0 1480 1030" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Signature Doctor interface illustration — simulated demo data</title>
+<desc id="desc">A static illustration of Signature Doctor's charcoal and amber dashboard. The synthetic Asterion demo has nine recipes: four valid, one moved, one ambiguous, one missing, one validation failure, and one disabled. Five of eight enabled recipes pass. No results are approved. ViewMatrix is selected, showing its actual simulated resolution evidence. This is an interface illustration, not a browser screenshot or live-target result.</desc>
+<defs>
+<symbol id="grid" viewBox="0 0 20 20"><g stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="12" y="3" width="5" height="5" rx="1"/><rect x="3" y="12" width="5" height="5" rx="1"/><rect x="12" y="12" width="5" height="5" rx="1"/></g></symbol>
+<symbol id="list" viewBox="0 0 20 20"><path d="M8 5H17M8 10H17M8 15H17M3 5H4M3 10H4M3 15H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+<symbol id="clock" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M10 6V10L13 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="download" viewBox="0 0 20 20"><path d="M10 3V12M6 9L10 13L14 9M3 13V17H17V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="link" viewBox="0 0 20 20"><path d="M8 7L11 4A3.5 3.5 0 0 1 16 9L13 12M12 13L9 16A3.5 3.5 0 0 1 4 11L7 8M7 13L13 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="book" viewBox="0 0 20 20"><path d="M4 4H10V17H4V4ZM10 4H16V17H10M7 7H8M12 7H14M7 10H8M12 10H14" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
+<symbol id="search" viewBox="0 0 20 20"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M12 12L17 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="scan" viewBox="0 0 20 20"><path d="M3 7V3H7M13 3H17V7M17 13V17H13M7 17H3V13M3 10H17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="target" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.3"/></symbol>
+<symbol id="shield" viewBox="0 0 20 20"><path d="M10 2L16 5V10C16 14 13 16 10 18C7 16 4 14 4 10V5L10 2Z" stroke="currentColor" stroke-width="1.3"/><path d="M7 10L9 12L13 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="check" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.3"/><path d="M6 10L9 13L14 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="warning" viewBox="0 0 20 20"><path d="M10 3L18 17H2L10 3Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M10 8V11M10 14V14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+<symbol id="pulse" viewBox="0 0 20 20"><path d="M1 10H5L8 4L12 16L15 10H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs>
+<rect x="0" y="0" width="1480" height="1030" rx="0" fill="#0b0d0f" stroke="#0b0d0f"/>
+<text x="24" y="25" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" letter-spacing="1.7">INTERFACE ILLUSTRATION</text>
+<text x="1456" y="25" fill="#edc477" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end" letter-spacing="1.2">SIMULATED DEMO DATA</text>
+<rect x="20" y="45" width="1440" height="965" rx="12" fill="#101214" stroke="#34383d"/>
+<rect x="21" y="46" width="218" height="963" rx="11" fill="#141618" stroke="#141618"/>
+<rect x="229" y="46" width="10" height="963" rx="0" fill="#141618" stroke="#141618"/>
+<path d="M240 45L240 1010" stroke="#282c30" />
+<rect x="45" y="75" width="35" height="35" rx="9" fill="#edc477" stroke="#edc477"/>
+<text x="62.5" y="102" fill="#17191b" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="500" text-anchor="middle">+</text>
+<text x="92" y="88" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="650" >Signature Doctor</text>
+<text x="92" y="106" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" letter-spacing="2.2">BY ECH0</text>
+<rect x="38" y="136" width="184" height="57" rx="8" fill="#1c1f22" stroke="#2a2e32"/>
+<rect x="49" y="149" width="30" height="30" rx="6" fill="#2a261e" stroke="#3d3930"/>
+<text x="55" y="169" fill="#edc477" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="13" font-weight="400" >‹ ›</text>
+<text x="89" y="158" fill="#e0e3e5" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="550" >Asterion · core</text>
+<text x="89" y="176" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Example workspace</text>
+<text x="46" y="227" fill="#717a81" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.6">WORKSPACE</text>
+<rect x="33" y="239" width="194" height="37" rx="6" fill="#29271f" stroke="#29271f"/>
+<rect x="20" y="249" width="2" height="18" rx="0" fill="#edc477" stroke="#edc477"/>
+<use href="#grid" x="47" y="248" width="17" height="17" color="#edc477"/>
+<text x="76" y="261" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Overview</text>
+<use href="#list" x="47" y="292" width="17" height="17" color="#92979d"/>
+<text x="76" y="305" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Signature catalog</text>
+<use href="#clock" x="47" y="336" width="17" height="17" color="#92979d"/>
+<text x="76" y="349" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Build history</text>
+<use href="#download" x="47" y="380" width="17" height="17" color="#92979d"/>
+<text x="76" y="393" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Export center</text>
+<rect x="197" y="290" width="20" height="18" rx="4" fill="#141618" stroke="#414036"/>
+<text x="207" y="303" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="middle">9</text>
+<path d="M45 424H214" stroke="#23272b" />
+<text x="46" y="455" fill="#717a81" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.6">RESOURCES</text>
+<use href="#link" x="47" y="477" width="17" height="17" color="#92979d"/>
+<text x="76" y="491" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Connect Echo</text>
+<use href="#book" x="47" y="521" width="17" height="17" color="#92979d"/>
+<text x="76" y="535" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Documentation</text>
+<circle cx="48" cy="910" r="3" fill="#edc477"/>
+<text x="59" y="914" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >DEMO ENVIRONMENT</text>
+<text x="45" y="935" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Simulated data · no target access</text>
+<path d="M45 955H214" stroke="#2a2e32" />
+<text x="45" y="982" fill="#dfe2e2" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="15" font-weight="400" >Ech0.</text>
+<text x="214" y="982" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end">v1.0.0</text>
+<path d="M240 109H1460" stroke="#23272b" />
+<text x="274" y="83" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Workspace</text>
+<text x="350" y="83" fill="#58616a" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="400" >›</text>
+<text x="373" y="83" fill="#d6d8d8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Overview</text>
+<use href="#search" x="1080" y="70" width="15" height="15" color="#626b73"/>
+<text x="1103" y="82" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Search signatures</text>
+<rect x="1221" y="68" width="19" height="19" rx="4" fill="#101214" stroke="#2a2e32"/>
+<text x="1230" y="81" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="11" font-weight="400" text-anchor="middle">/</text>
+<path d="M1256 69L1256 89" stroke="#2a2e32" />
+<rect x="1272" y="65" width="104" height="29" rx="6" fill="#191c1f" stroke="#2a2e32"/>
+<circle cx="1285" cy="79.5" r="3" fill="#626b73"/>
+<text x="1296" y="83" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Echo offline</text>
+<circle cx="1410" cy="80" r="14" fill="#292d30" stroke="#3a3f44"/>
+<text x="1410" y="83" fill="#c7cacc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle">E0</text>
+<use href="#pulse" x="274" y="130" width="13" height="13" color="#edc477"/>
+<text x="295" y="141" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.7">BUILD DIAGNOSTICS</text>
+<text x="274" y="181" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="550" letter-spacing="-1.0">Every address. Accounted for.</text>
+<text x="274" y="207" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Catch broken signatures. Review what moved. Ship with confidence.</text>
+<rect x="1123" y="164" width="130" height="36" rx="6" fill="#101214" stroke="#2a2e32"/>
+<text x="1136" y="187" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17" font-weight="400" >+</text>
+<text x="1155" y="186" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="550" >Add signature</text>
+<rect x="1264" y="164" width="162" height="36" rx="6" fill="#edc477" stroke="#edc477"/>
+<use href="#scan" x="1276" y="174" width="15" height="15" color="#252118"/>
+<text x="1301" y="186" fill="#252118" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="550" >Check this build</text>
+<rect x="274" y="230" width="1152" height="43" rx="7" fill="#171a1d" stroke="#2a2e32"/>
+<rect x="287" y="239" width="132" height="25" rx="5" fill="#101315" stroke="#353a3f"/>
+<rect x="290" y="242" width="48" height="19" rx="3" fill="#34312a" stroke="#34312a"/>
+<text x="314" y="255" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle">Demo</text>
+<text x="377" y="255" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle">Live Echo</text>
+<text x="433" y="256" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Explore the workflow with</text>
+<text x="571" y="256" fill="#c0c6cb" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >simulated process data.</text>
+<text x="1201" y="255" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Next check</text>
+<text x="1409" y="255" fill="#b4bbc1" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end">Build 1.8.3 · demo</text>
+<rect x="274" y="294" width="276" height="109" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<text x="291" y="317" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Passing checks</text>
+<use href="#pulse" x="516" y="305" width="15" height="15" color="#7d858c"/>
+<text x="291" y="359" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="500" letter-spacing="-1">63</text>
+<text x="332" y="357" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >%</text>
+<text x="291" y="384" fill="#92d8b3" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >5 of 8 enabled signatures passed</text>
+<rect x="566" y="294" width="276" height="109" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<text x="583" y="317" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Needs attention</text>
+<use href="#warning" x="808" y="305" width="15" height="15" color="#7d858c"/>
+<text x="583" y="359" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="500" letter-spacing="-1">04</text>
+<text x="624" y="357" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" ></text>
+<text x="583" y="384" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >1 moved · 3 unresolved or failed</text>
+<rect x="858" y="294" width="276" height="109" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<text x="875" y="317" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Catalog entries</text>
+<use href="#list" x="1100" y="305" width="15" height="15" color="#7d858c"/>
+<text x="875" y="359" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="500" letter-spacing="-1">09</text>
+<text x="916" y="357" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" > / 250</text>
+<text x="875" y="384" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >2 modules · 1 disabled</text>
+<rect x="1150" y="294" width="276" height="109" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<text x="1167" y="317" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Approved for export</text>
+<use href="#shield" x="1392" y="305" width="15" height="15" color="#7d858c"/>
+<text x="1167" y="359" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="500" letter-spacing="-1">00</text>
+<text x="1208" y="357" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" > / 5</text>
+<text x="1167" y="384" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Review required · demo</text>
+<rect x="274" y="425" width="810" height="527" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<text x="293" y="451" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="550" >Signature catalog</text>
+<rect x="407" y="438" width="20" height="17" rx="4" fill="#191c1f" stroke="#383e43"/>
+<text x="417" y="450" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" text-anchor="middle">9</text>
+<text x="293" y="470" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Build 1.8.3 · demo</text>
+<use href="#download" x="1046" y="441" width="16" height="16" color="#92979d"/>
+<rect x="293" y="485" width="97" height="26" rx="4" fill="#2b3034" stroke="#2b3034"/>
+<text x="303" y="502" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >All signatures</text>
+<text x="405" y="502" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Needs attention</text>
+<text x="508" y="502" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Approved</text>
+<rect x="887" y="486" width="178" height="25" rx="5" fill="#171a1d" stroke="#30363b"/>
+<use href="#search" x="896" y="492" width="13" height="13" color="#626b73"/>
+<text x="917" y="503" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Find a signature…</text>
+<path d="M274 521H1084" stroke="#2a2e32" />
+<rect x="275" y="522" width="808" height="31" rx="0" fill="#171a1d" stroke="#171a1d"/>
+<text x="293" y="542" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Signature</text>
+<text x="517" y="542" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Module</text>
+<text x="650" y="542" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Resolution</text>
+<text x="812" y="542" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Status</text>
+<text x="1002" y="542" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Change</text>
+<path d="M274 553H1084" stroke="#252b30" />
+<rect x="293" y="561" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#scan" x="299" y="567" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="570" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >WorldState</text>
+<text x="329" y="584" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Signature · rel32</text>
+<text x="517" y="577" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="577" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0x2f8000</text>
+<rect x="812" y="562" width="46.5" height="23" rx="4" fill="#1b3028" stroke="#2d4b3d"/>
+<circle cx="821" cy="573.5" r="2.2" fill="#92d8b3"/>
+<text x="828" y="577" fill="#92d8b3" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Valid</text>
+<text x="1002" y="577" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >stable</text>
+<path d="M274 593H1084" stroke="#252a2f" />
+<rect x="275" y="593" width="808" height="40" rx="0" fill="#242721" stroke="#242721"/>
+<rect x="274" y="593" width="2" height="40" rx="0" fill="#edc477" stroke="#edc477"/>
+<rect x="293" y="601" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#scan" x="299" y="607" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="610" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >ViewMatrix</text>
+<text x="329" y="624" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Signature · rel32</text>
+<text x="517" y="617" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="617" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0x303c00</text>
+<rect x="812" y="602" width="46.5" height="23" rx="4" fill="#302a1e" stroke="#50432d"/>
+<circle cx="821" cy="613.5" r="2.2" fill="#edc477"/>
+<text x="828" y="617" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Moved</text>
+<text x="1002" y="617" fill="#edc477" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0xdb0</text>
+<path d="M274 633H1084" stroke="#252a2f" />
+<rect x="293" y="641" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#scan" x="299" y="647" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="650" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >EntityList</text>
+<text x="329" y="664" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Signature · rel32</text>
+<text x="517" y="657" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="657" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >48 8B 0D ?? …</text>
+<rect x="812" y="642" width="67.69999999999999" height="23" rx="4" fill="#2b253a" stroke="#453a5b"/>
+<circle cx="821" cy="653.5" r="2.2" fill="#b4a4ed"/>
+<text x="828" y="657" fill="#b4a4ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Ambiguous</text>
+<text x="1002" y="657" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >2 hits</text>
+<path d="M274 673H1084" stroke="#252a2f" />
+<rect x="293" y="681" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#scan" x="299" y="687" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="690" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >SettingsRoot</text>
+<text x="329" y="704" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Signature · rel32</text>
+<text x="517" y="697" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="697" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >48 8B 15 ?? …</text>
+<rect x="812" y="682" width="57.1" height="23" rx="4" fill="#332326" stroke="#503237"/>
+<circle cx="821" cy="693.5" r="2.2" fill="#f09191"/>
+<text x="828" y="697" fill="#f09191" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Missing</text>
+<text x="1002" y="697" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >—</text>
+<path d="M274 713H1084" stroke="#252a2f" />
+<rect x="293" y="721" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#target" x="299" y="727" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="730" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >ObjectCount</text>
+<text x="329" y="744" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Module-relative offset</text>
+<text x="517" y="737" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="737" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0x31a020</text>
+<rect x="812" y="722" width="110.1" height="23" rx="4" fill="#332326" stroke="#503237"/>
+<circle cx="821" cy="733.5" r="2.2" fill="#f09191"/>
+<text x="828" y="737" fill="#f09191" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Validation failed</text>
+<text x="1002" y="737" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >—</text>
+<path d="M274 753H1084" stroke="#252a2f" />
+<rect x="293" y="761" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#link" x="299" y="767" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="770" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >CameraState</text>
+<text x="329" y="784" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >2-hop pointer chain</text>
+<text x="517" y="777" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="777" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >0x2fa000</text>
+<rect x="812" y="762" width="46.5" height="23" rx="4" fill="#1b3028" stroke="#2d4b3d"/>
+<circle cx="821" cy="773.5" r="2.2" fill="#92d8b3"/>
+<text x="828" y="777" fill="#92d8b3" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Valid</text>
+<text x="1002" y="777" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >dynamic</text>
+<path d="M274 793H1084" stroke="#252a2f" />
+<rect x="293" y="801" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#target" x="299" y="807" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="810" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >FrameDelta</text>
+<text x="329" y="824" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Module-relative offset</text>
+<text x="517" y="817" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >engine.dll</text>
+<text x="650" y="817" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0x18e020</text>
+<rect x="812" y="802" width="46.5" height="23" rx="4" fill="#1b3028" stroke="#2d4b3d"/>
+<circle cx="821" cy="813.5" r="2.2" fill="#92d8b3"/>
+<text x="828" y="817" fill="#92d8b3" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Valid</text>
+<text x="1002" y="817" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >stable</text>
+<path d="M274 833H1084" stroke="#252a2f" />
+<rect x="293" y="841" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#scan" x="299" y="847" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="850" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >InputState</text>
+<text x="329" y="864" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >Signature · rel32</text>
+<text x="517" y="857" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe</text>
+<text x="650" y="857" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >+0x329e10</text>
+<rect x="812" y="842" width="46.5" height="23" rx="4" fill="#1b3028" stroke="#2d4b3d"/>
+<circle cx="821" cy="853.5" r="2.2" fill="#92d8b3"/>
+<text x="828" y="857" fill="#92d8b3" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Valid</text>
+<text x="1002" y="857" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >stable</text>
+<path d="M274 873H1084" stroke="#252a2f" />
+<rect x="293" y="881" width="25" height="25" rx="5" fill="#20252a" stroke="#383e43"/>
+<use href="#link" x="299" y="887" width="13" height="13" color="#9aa3ac"/>
+<text x="329" y="890" fill="#e1e5e6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="500" >ExperimentalCache</text>
+<text x="329" y="904" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="8" font-weight="400" >1-hop pointer chain</text>
+<text x="517" y="897" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >engine.dll</text>
+<text x="650" y="897" fill="#a0aab3" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >0x181000</text>
+<rect x="812" y="882" width="62.4" height="23" rx="4" fill="#272b2e" stroke="#3b4248"/>
+<circle cx="821" cy="893.5" r="2.2" fill="#92979d"/>
+<text x="828" y="897" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Disabled</text>
+<text x="1002" y="897" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >—</text>
+<path d="M274 913H1084" stroke="#2a2e32" />
+<text x="293" y="937" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >9 of 9 signatures</text>
+<use href="#shield" x="970" y="925" width="11" height="11" color="#626b73"/>
+<text x="986" y="935" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Simulated reads</text>
+<rect x="1106" y="425" width="320" height="527" rx="8" fill="#191c1f" stroke="#2a2e32"/>
+<use href="#target" x="1123" y="441" width="15" height="15" color="#626b73"/>
+<text x="1146" y="453" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="550" >Signature inspector</text>
+<path d="M1106 475H1426" stroke="#2a2e32" />
+<text x="1123" y="501" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="8" font-weight="650" letter-spacing="1.3">RESOLUTION DETAILS</text>
+<rect x="1340" y="485" width="46.5" height="23" rx="4" fill="#302a1e" stroke="#50432d"/>
+<circle cx="1349" cy="496.5" r="2.2" fill="#edc477"/>
+<text x="1356" y="500" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Moved</text>
+<text x="1123" y="531" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="550" letter-spacing="-.4">ViewMatrix</text>
+<text x="1123" y="552" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Module-relative resolution changed;</text>
+<text x="1123" y="568" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >review before exporting.</text>
+<path d="M1123 583H1409" stroke="#2a2e32" />
+<text x="1123" y="603" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" letter-spacing="1">BYTE PATTERN</text>
+<rect x="1123" y="613" width="286" height="45" rx="5" fill="#121619" stroke="#2d3338"/>
+<text x="1133" y="632" fill="#b6bec5" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" >48 8D 0D ?? ?? ?? ?? E8</text>
+<text x="1133" y="648" fill="#b6bec5" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" >?? ?? ?? ?? 84 C0</text>
+<text x="1123" y="681" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" letter-spacing="1">RESOLUTION PATH</text>
+<circle cx="1129" cy="703" r="3.5" fill="#262e23" stroke="#828b76"/>
+<path d="M1129 709L1129 733" stroke="#40483b" stroke-dasharray="2 3"/>
+<text x="1145" y="704" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Module</text>
+<text x="1145" y="719" fill="#d1d8db" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe @ 0x7ff600000000</text>
+<circle cx="1129" cy="741" r="3.5" fill="#262e23" stroke="#828b76"/>
+<path d="M1129 747L1129 771" stroke="#40483b" stroke-dasharray="2 3"/>
+<text x="1145" y="742" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Unique signature</text>
+<text x="1145" y="757" fill="#d1d8db" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >Asterion.exe+0x437c0</text>
+<circle cx="1129" cy="779" r="3.5" fill="#262e23" stroke="#828b76"/>
+<text x="1145" y="780" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Relative target</text>
+<text x="1145" y="795" fill="#d1d8db" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" >0x7ff600303c00</text>
+<path d="M1123 813H1409" stroke="#2a2e32" />
+<text x="1123" y="833" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" letter-spacing="1">VALIDATION EVIDENCE</text>
+<use href="#check" x="1123" y="843" width="12" height="12" color="#92d8b3"/>
+<text x="1144" y="854" fill="#a4afb6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Readable · 64 bytes</text>
+<use href="#check" x="1123" y="863" width="12" height="12" color="#92d8b3"/>
+<text x="1144" y="874" fill="#a4afb6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >16-byte alignment</text>
+<use href="#check" x="1123" y="883" width="12" height="12" color="#92d8b3"/>
+<text x="1144" y="894" fill="#a4afb6" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Inside Asterion.exe</text>
+<rect x="1123" y="910" width="286" height="28" rx="5" fill="#edc477" stroke="#edc477"/>
+<text x="1266" y="928" fill="#252118" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="550" text-anchor="middle">✓  Approve this result</text>
+<use href="#link" x="277" y="969" width="13" height="13" color="#edc477"/>
+<text x="299" y="980" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Comparing with 1.8.2 · known good</text>
+<text x="1084" y="980" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="end">Build history →</text>
+<text x="1426" y="981" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" text-anchor="end">Approval is scoped to this check.</text>
+</svg>

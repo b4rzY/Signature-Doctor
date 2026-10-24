@@ -1,0 +1,2 @@
+/* Kept separate so user customizations can be added without a build step. */
+html{scrollbar-color:#3a4248 #15191c;scrollbar-width:thin}::selection{background:#edc47740;color:#fff}
