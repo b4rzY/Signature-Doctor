@@ -22,7 +22,7 @@ function fixture(overrides = {}) {
     target: { pid: 42, base: '0x140000000', modules: [{ name: 'Fixture.exe', base: '0x140000000', size: 65536 }] },
     results: catalog.items.map(item => ({
       id: item.id, status: 'valid', address: '0x140002000', module: 'Fixture.exe', rva: '0x2000',
-      checks: item.checks.map(check => ({ label: check.type, passed: true, detail: 'ok' })),
+      checks: (item.checks.length ? item.checks : [{ type: 'readable' }]).map(check => ({ label: check.type, passed: true, detail: 'ok' })),
       trace: [], message: 'Valid', durationMs: 1, definitionHash: hashItem(item),
     })),
   };
@@ -114,7 +114,7 @@ test('all validation variants survive export and uint64 limits stay exact', () =
   assert.match(code, /value_2 <= uint64\(0xffffffffffffffff\)/);
   assert.match(code, /\(-int64\(0x7fffffffffffffff\) - 1\)/);
   assert.match(code, /value_4 != value_4/);
-  assert.match(code, /value_4 >= -1.5 && value_4 <= 9.25/);
+  assert.match(code, /double\(value_4\) >= -1.5 && double\(value_4\) <= 9.25/);
 });
 
 test('identifiers cannot collide after sanitization', () => {
@@ -146,4 +146,22 @@ test('malformed completed reports cannot bypass the export gate', () => {
   assert.throws(() => createManifest(catalog, duplicate, ['count']), /duplicate/);
   run.results[0].address = '0x0';
   assert.throws(() => createManifest(catalog, run, ['camera-root']), /usable resolved/);
+});
+
+test('empty or truthy nonboolean validation evidence cannot pass the review gate', () => {
+  for (const checks of [[], [{ passed: 'true' }], [null]]) {
+    const { catalog, run } = fixture();
+    run.results[0].checks = checks;
+    assert.throws(() => createManifest(catalog, run, ['camera-root']), /failed validation/);
+  }
+});
+
+test('generated scripts use only the documented shared process binding subset', () => {
+  const { catalog, run } = fixture();
+  const code = generateAngelScript(catalog, run, ['camera-root', 'count']);
+  assert.match(code, /portable AngelScript runtime resolvers/);
+  assert.doesNotMatch(code, /Echo|Ech0|Solanius|process::open_socket|virtual_query|ui::|ws::|atomic_/);
+  const allowed = new Set(['attach', 'is_alive', 'get_module_base', 'get_module_size', 'find_signatures', 'get_relative_address', 'read_bytes', 'read_int8', 'read_uint8', 'read_int16', 'read_uint16', 'read_int32', 'read_uint32', 'read_int64', 'read_uint64', 'read_float', 'read_double']);
+  for (const match of code.matchAll(/process::([A-Za-z_][A-Za-z0-9_]*)\s*\(/g)) assert.ok(allowed.has(match[1]), `Unexpected binding ${match[1]}`);
+  assert.match(code, /process::attach\(SD_PROCESS\)/); // One arg works with a host's optional second arg.
 });
