@@ -40,7 +40,7 @@ function decode(bytes, dataType) {
 }
 async function identity(rpc, catalog, signal) {
   const ping = await call(rpc, { type: 'ping' }, signal);
-  if (ping.attached !== true || !Number.isSafeInteger(ping.pid) || ping.pid <= 0) throw new Error('Echo is not attached to a running target process');
+  if (ping.attached !== true || !Number.isSafeInteger(ping.pid) || ping.pid <= 0) throw new Error('No running target process is attached');
   const base = hex(nonzero(ping.base, 'Process base'));
   const response = await call(rpc, { type: 'modules' }, signal);
   if (response.success !== true || !Array.isArray(response.modules) || !response.modules.length || response.modules.length > 4096) throw new Error('Could not enumerate target modules');
