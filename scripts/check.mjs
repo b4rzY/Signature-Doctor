@@ -17,5 +17,5 @@ async function walk(dir) {
   }
 }
 await walk('');
-for (const file of ['public/index.html', 'public/styles.css', 'examples/echo-connect.as', 'README.md']) await readFile(new URL(file, root));
+for (const file of ['public/index.html', 'public/styles.css', 'examples/angelscript-connect.as', 'README.md']) await readFile(new URL(file, root));
 console.log(`Syntax checked ${count} JavaScript modules; required entry files present.`);
