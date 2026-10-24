@@ -41,7 +41,7 @@ function reviewed(catalogInput, run, approvedIds) {
     if (typeof result.address !== 'string' || parseAddress(result.address, 'Resolved address') === 0n) {
       throw new Error(`Entry ${item.name} has no usable resolved address.`);
     }
-    if (!Array.isArray(result.checks) || result.checks.some(check => !check.passed)) {
+    if (!Array.isArray(result.checks) || !result.checks.length || result.checks.some(check => !check || check.passed !== true)) {
       throw new Error(`Entry ${item.name} has a failed validation.`);
     }
     return { item, result };
@@ -167,7 +167,8 @@ function generateChecks(item) {
       lines.push(`    if (candidate > uint64(0xffffffffffffffff) - ${width - 1}) return false;`);
       lines.push(`    if (!process::${read}(candidate, value_${index})) return false;`);
       if (signed === null) lines.push(`    if (value_${index} != value_${index}) return false; // NaN`);
-      lines.push(`    if (!(value_${index} >= ${min} && value_${index} <= ${max})) return false;`);
+      const expression = signed === null ? `double(value_${index})` : `value_${index}`;
+      lines.push(`    if (!(${expression} >= ${min} && ${expression} <= ${max})) return false;`);
     } else {
       throw new Error(`Cannot export unsupported validation ${check.type}.`);
     }
@@ -253,13 +254,13 @@ export function generateAngelScript(catalogInput, run, approvedIds) {
     item.module, ...item.checks.filter(check => check.type === 'in_module').map(check => check.module),
   ]))];
   const lines = [
-    '// Signature Doctor / Ech0 — reviewed runtime resolvers',
+    '// Signature Doctor — portable AngelScript runtime resolvers',
     `// Project: ${comment(catalog.name)}`,
     `// Build: ${comment(run.label)} | Run: ${comment(run.id)}`,
     `// Completed: ${comment(run.completedAt)}`,
-    '// Generated against the documented Echo / Angel Process API.',
+    '// Uses the shared documented AngelScript Process API.',
     '// Re-resolves recipes and repeats every validation. Never writes target memory.',
-    '// Source generation is tested; compile and verify against your installed Echo runtime.',
+    '// Verify target-specific behavior in your installed AngelScript host runtime.',
     '// This is a standalone script. When integrating, retain the helpers and merge main().',
     '// Call sd_resolve_all() again after an attachment or target build changes.',
     '',
