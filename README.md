@@ -1,18 +1,16 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/e78b90dd-e9fa-4fa9-8590-d7fbcf77de51" alt="The Doctor, Signature Doctor's hooded hacker investigator, inspecting signature bytes and memory offsets through an amber forensic lens." width="100%" />
-</p>
+<h1 align="center">SIGNATURE DOCTOR</h1>
+<p align="center"><b>Resolve signatures. Trace changes. Verify the evidence.</b></p>
 
 <p align="center">
   <a href="https://github.com/b4rzY/Signature-Doctor/actions/workflows/ci.yml"><img src="https://github.com/b4rzY/Signature-Doctor/actions/workflows/ci.yml/badge.svg" alt="Verification status" /></a>
-  <img src="https://img.shields.io/badge/Node.js-22%2B-83bfa4?style=flat-square" alt="Node.js 22 or newer" />
-  <img src="https://img.shields.io/badge/AngelScript-host_adapter-e8b36b?style=flat-square" alt="AngelScript host adapter" />
-  <img src="https://img.shields.io/badge/Target_access-read_only-98a9c7?style=flat-square" alt="Read-only target access" />
+  <img src="https://img.shields.io/badge/Node.js-22%2B-b0f57a?style=flat-square" alt="Node.js 22 or newer" />
+  <img src="https://img.shields.io/badge/AngelScript-host_adapter-b0f57a?style=flat-square" alt="AngelScript host adapter" />
+  <img src="https://img.shields.io/badge/Target_access-read_only-a0aca2?style=flat-square" alt="Read-only target access" />
 </p>
 
 <p align="center">
-  <b>Every offset leaves a clue.</b><br />
   A signature and offset maintenance workbench for AngelScript runtimes.<br />
-  Follow the bytes. Check the evidence. Export what you reviewed.
+  Local diagnostics, build comparison, and reviewed exports.
 </p>
 
 <p align="center">
@@ -26,18 +24,20 @@
 
 ---
 
-## The update happened. What still works?
+## Signature maintenance, in one workbench
 
-Meet **the Doctor**, the offset investigator on the cover. His cases start where an application update leaves questions: a signature has vanished, a module offset has moved, or a pointer chain no longer adds up.
-
-Signature Doctor gives you the evidence to investigate. Keep signatures, offsets, and pointer chains in a named catalog, check the current build, and open each result to follow its resolution steps, validation outcomes, and comparison against the baseline you selected. The report shows what was observed; you decide what is ready to use.
+Keep signatures, module offsets, and pointer chains in a named catalog. Check a build, compare it with a baseline, and inspect each result before approving an export. The inspector shows resolution steps and validation evidence alongside the catalog.
 
 It is a **local application**. The dashboard and its Node server run on your machine. You can connect a compatible AngelScript host through the included portable adapter, reuse an existing [web-mv](https://github.com/Jozkah/web-mv) relay, or explore a clearly labeled synthetic demo without a target process.
 
 <p align="center">
-  <img src="docs/assets/dashboard-preview.svg" alt="Static interface illustration showing Signature Doctor's simulated demo workspace, build health, catalog results and a resolution inspector" width="100%" />
-  <br /><sub>Interface illustration · simulated demo data. This is a static illustration of the implemented interface, not a browser screenshot.</sub>
+  <img src="docs/assets/dashboard-noir.png" alt="Signature Doctor noir interface showing build diagnostics, signature catalog, and the ViewMatrix inspector with simulated demo data" width="100%" />
+  <br /><sub>Browser screenshot · noir workbench · simulated demo data.</sub>
 </p>
+
+### The interface
+
+Near-black surfaces, phosphor-green controls, and monospace addresses keep the workspace focused on the data. Numbered navigation connects diagnostics, catalog definitions, build history, and exports. A compact metrics strip summarizes each run; the selected signature opens beside the results with its byte pattern, resolution path, and checks. Status labels distinguish moved, missing, ambiguous, and failed results without relying on color alone.
 
 ### What you get
 
@@ -53,7 +53,7 @@ It is a **local application**. The dashboard and its Node server run on your mac
 
 ## The workflow
 
-Treat an update as a new case. Your catalog records what you expect to find, the baseline preserves earlier observations, and the new run shows what the current target actually reveals. Follow that trail before approving an export.
+Define your expected addresses, check a known build, and compare later runs against that baseline. Review the evidence before exporting.
 
 ```mermaid
 flowchart TD
@@ -67,7 +67,7 @@ flowchart TD
     F --> H["Export reviewed manifest or AngelScript"]
 ```
 
-1. **Build the case file.** Your catalog holds the recipes: give each item a stable ID, readable name, module, resolution method, and meaningful checks.
+1. **Define the catalog.** Your catalog holds the recipes: give each item a stable ID, readable name, module, resolution method, and meaningful checks.
 2. **Establish the baseline.** Check a known build, inspect its results, and explicitly select it as your baseline.
 3. **Check the updated build.** Signature Doctor resolves the current catalog against the connected target and records what it observed.
 4. **Follow the evidence.** Open an item to inspect its resolution path, previous/current locations, and failed checks. A changed address is a reason to look closer.
@@ -85,7 +85,7 @@ flowchart TD
 | **Read error** | A transport, protocol, or memory-read failure prevented a reliable result. | No |
 | **Disabled** | The catalog item was intentionally excluded. | No |
 
-**The Doctor's rule: a match is a lead.** `Valid` means “passed this recipe's checks.” A readable address by itself does not establish that it represents the intended object. Add byte, range, alignment, or module checks that describe what you expect.
+**A match still needs validation.** `Valid` means “passed this recipe's checks.” A readable address by itself does not establish that it represents the intended object. Add byte, range, alignment, or module checks that describe what you expect.
 
 ## Quick start
 
@@ -100,7 +100,7 @@ npm start
 
 Open **[http://127.0.0.1:3210](http://127.0.0.1:3210)**.
 
-Start with a practice case: the demo lets you inspect a complete workflow immediately. Its fictional `Asterion.exe` target has synthetic modules and memory. Demo JSON exports are marked as demo data; AngelScript export requires a live run.
+The demo lets you inspect a complete workflow immediately. Its fictional `Asterion.exe` target has synthetic modules and memory. Demo JSON exports are marked as demo data; AngelScript export requires a live run.
 
 Windows users can also use **`run.bat`**. On macOS/Linux, use **`bash run.sh`**. These launchers check the Node version and install dependencies when needed.
 
@@ -203,7 +203,7 @@ The [catalog reference](docs/CATALOG.md) covers all resolver kinds, pointer sema
 
 ## Review and export
 
-Keep the chain of evidence intact. Inspect each eligible result, approve the entries you have reviewed, and export their resolution recipes with the checks that support them.
+Inspect each eligible result, approve the entries you have reviewed, and export their resolution recipes with the checks that support them.
 
 ### Reviewed JSON manifest
 
@@ -244,7 +244,7 @@ npm run dev
 
 `npm run verify` checks JavaScript syntax and runs the automated tests. `npm run dev` serves the same application for development; it listens on all interfaces for preview tooling. Use `npm start` for the normal loopback-only session.
 
-**Verification scope:** the resolver, transport, export, and interface logic have automated tests. Browser visual QA could not be performed in the build environment because its managed preview service was unavailable. The illustration above is labeled accordingly. Live host installations were also unavailable; host compatibility is based on documented APIs and the checks described in the [compatibility guide](docs/COMPATIBILITY.md#verification-scope).
+**Verification scope:** the resolver, transport, export, and interface logic have automated tests. The noir dashboard was visually inspected in a local browser; the screenshot above comes from that running application. The redesign passed all 68 automated tests. This is not an exhaustive cross-browser or mobile-device validation. Live host installations were also unavailable; host compatibility is based on documented APIs and the checks described in the [compatibility guide](docs/COMPATIBILITY.md#verification-scope).
 
 Optional compiler/VM fixtures require AngelScript SDK **2.38.0** and a GNU-compatible C++17 compiler:
 
