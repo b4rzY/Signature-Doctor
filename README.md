@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/hero.svg" alt="Signature Doctor — an AngelScript signature and offset maintenance workbench." width="100%" />
+  <img src="https://github.com/user-attachments/assets/e78b90dd-e9fa-4fa9-8590-d7fbcf77de51" alt="The Doctor, Signature Doctor's hooded hacker investigator, inspecting signature bytes and memory offsets through an amber forensic lens." width="100%" />
 </p>
 
 <p align="center">
@@ -10,8 +10,9 @@
 </p>
 
 <p align="center">
-  <b>A signature and offset maintenance workbench for AngelScript runtimes.</b><br />
-  Keep a named catalog. Check a new build. Inspect the evidence. Export only what you reviewed.
+  <b>Every offset leaves a clue.</b><br />
+  A signature and offset maintenance workbench for AngelScript runtimes.<br />
+  Follow the bytes. Check the evidence. Export what you reviewed.
 </p>
 
 <p align="center">
@@ -27,7 +28,9 @@
 
 ## The update happened. What still works?
 
-Signature Doctor turns a collection of signatures, offsets, and pointer chains into a reviewable build report. Every result carries its resolution steps, validation outcomes, and comparison against the baseline you selected.
+Meet **the Doctor**, the offset investigator on the cover. His cases start where an application update leaves questions: a signature has vanished, a module offset has moved, or a pointer chain no longer adds up.
+
+Signature Doctor gives you the evidence to investigate. Keep signatures, offsets, and pointer chains in a named catalog, check the current build, and open each result to follow its resolution steps, validation outcomes, and comparison against the baseline you selected. The report shows what was observed; you decide what is ready to use.
 
 It is a **local application**. The dashboard and its Node server run on your machine. You can connect a compatible AngelScript host through the included portable adapter, reuse an existing [web-mv](https://github.com/Jozkah/web-mv) relay, or explore a clearly labeled synthetic demo without a target process.
 
@@ -41,7 +44,7 @@ It is a **local application**. The dashboard and its Node server run on your mac
 | Capability | What it does |
 | --- | --- |
 | **Named resolver catalog** | Store IDA-style signatures, module-relative addresses, signed addends, rel32 references, and bounded pointer chains. |
-| **Evidence, not just a color** | Inspect candidate addresses, each resolution step, readable-byte checks, numeric ranges, alignment, and module membership. |
+| **Evidence trail** | Inspect candidate addresses, each resolution step, readable-byte checks, numeric ranges, alignment, and module membership. |
 | **Build comparison** | Compare against an explicitly chosen baseline while separating module relocation from changes to module offsets. |
 | **Review before export** | Approve eligible results individually. Export a reviewed JSON manifest or runtime AngelScript resolvers. |
 | **Local history** | Keep the latest 20 runs, baseline selection, and review choices in the browser. Download reports and catalog JSON. |
@@ -49,6 +52,8 @@ It is a **local application**. The dashboard and its Node server run on your mac
 | **Working demo** | Exercise the same resolution engine through a simulated RPC target, including missing and ambiguous signatures. |
 
 ## The workflow
+
+Treat an update as a new case. Your catalog records what you expect to find, the baseline preserves earlier observations, and the new run shows what the current target actually reveals. Follow that trail before approving an export.
 
 ```mermaid
 flowchart TD
@@ -62,10 +67,10 @@ flowchart TD
     F --> H["Export reviewed manifest or AngelScript"]
 ```
 
-1. **Define the recipe.** Give each item a stable ID, readable name, module, resolution method, and meaningful checks.
-2. **Check a known build.** Inspect the results and explicitly select it as your baseline.
+1. **Build the case file.** Your catalog holds the recipes: give each item a stable ID, readable name, module, resolution method, and meaningful checks.
+2. **Establish the baseline.** Check a known build, inspect its results, and explicitly select it as your baseline.
 3. **Check the updated build.** Signature Doctor resolves the current catalog against the connected target and records what it observed.
-4. **Review the differences.** Open an item to inspect its resolution path, previous/current locations, and failed checks.
+4. **Follow the evidence.** Open an item to inspect its resolution path, previous/current locations, and failed checks. A changed address is a reason to look closer.
 5. **Approve and export.** Only explicitly reviewed `Valid` or `Moved` results can enter the export. Changing the catalog requires a fresh check.
 
 ### Read the result correctly
@@ -80,7 +85,7 @@ flowchart TD
 | **Read error** | A transport, protocol, or memory-read failure prevented a reliable result. | No |
 | **Disabled** | The catalog item was intentionally excluded. | No |
 
-**Valid means “passed this recipe's checks.”** A readable address by itself does not establish that it represents the intended object. Add byte, range, alignment, or module checks that describe what you expect.
+**The Doctor's rule: a match is a lead.** `Valid` means “passed this recipe's checks.” A readable address by itself does not establish that it represents the intended object. Add byte, range, alignment, or module checks that describe what you expect.
 
 ## Quick start
 
@@ -95,7 +100,7 @@ npm start
 
 Open **[http://127.0.0.1:3210](http://127.0.0.1:3210)**.
 
-The demo lets you inspect a complete workflow immediately. Its fictional `Asterion.exe` target has synthetic modules and memory. Demo JSON exports are marked as demo data; AngelScript export requires a live run.
+Start with a practice case: the demo lets you inspect a complete workflow immediately. Its fictional `Asterion.exe` target has synthetic modules and memory. Demo JSON exports are marked as demo data; AngelScript export requires a live run.
 
 Windows users can also use **`run.bat`**. On macOS/Linux, use **`bash run.sh`**. These launchers check the Node version and install dependencies when needed.
 
@@ -197,6 +202,8 @@ Choose **Signature catalog → New catalog** to create an empty project with its
 The [catalog reference](docs/CATALOG.md) covers all resolver kinds, pointer semantics, validation types, limits, and numeric representation.
 
 ## Review and export
+
+Keep the chain of evidence intact. Inspect each eligible result, approve the entries you have reviewed, and export their resolution recipes with the checks that support them.
 
 ### Reviewed JSON manifest
 
