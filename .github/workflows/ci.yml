@@ -1,0 +1,31 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run verify
+      - name: Check out the pinned AngelScript 2.38.0 SDK
+        uses: actions/checkout@v4
+        with:
+          repository: anjo76/angelscript
+          ref: 0601da029d846a658bf23f2888e953a45a94450a
+          path: tmp/angelscript-sdk
+          persist-credentials: false
+      - name: Compile and execute the portable AngelScript fixtures
+        run: npm run verify:angelscript -- --sdk tmp/angelscript-sdk/sdk
