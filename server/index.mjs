@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readFile, stat, realpath } from 'node:fs/promises';
 import { WebSocketServer } from 'ws';
-import { BridgeError, EchoBridge } from './bridge.mjs';
+import { BridgeError, AgentBridge } from './bridge.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.ico': 'image/x-icon', '.woff2': 'font/woff2' };
@@ -48,7 +48,7 @@ async function bodyJSON(req) {
 }
 
 export function createDoctorServer({ rootDir = ROOT, host = '127.0.0.1', port = 3210, dev = false, upstream = null, timeoutMs = 30000, fetchImpl } = {}) {
-  const bridge = new EchoBridge({ upstream, timeoutMs, fetchImpl });
+  const bridge = new AgentBridge({ upstream, timeoutMs, fetchImpl });
   const wss = new WebSocketServer({ noServer: true, maxPayload: 2 * 1024 * 1024, perMessageDeflate: false });
   const server = http.createServer(async (req, res) => {
     securityHeaders(res);
@@ -58,6 +58,11 @@ export function createDoctorServer({ rootDir = ROOT, host = '127.0.0.1', port = 
       try { pathname = decodeURIComponent((req.url ?? '/').split('?')[0]); } catch { throw new BridgeError('Malformed URL.', 'BadPath', 400); }
       if (pathname.includes('\0') || pathname.includes('\\') || pathname.split('/').includes('..') || !pathname.startsWith('/')) throw new BridgeError('Invalid path.', 'BadPath', 400);
       if (pathname === '/api/status' && req.method === 'GET') { json(res, await bridge.status()); return; }
+      if (pathname === '/api/connector' && req.method === 'GET') {
+        const connector = await readFile(path.join(rootDir, 'examples', 'angelscript-connect.as'));
+        res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8', 'content-disposition': 'attachment; filename="angelscript-connect.as"', 'content-length': connector.length, 'cache-control': 'no-cache' });
+        res.end(connector); return;
+      }
       if (pathname === '/api/rpc' && req.method === 'POST') {
         const data = await bodyJSON(req);
         const controller = new AbortController();
@@ -113,7 +118,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const app = createDoctorServer({ dev, host: dev ? '0.0.0.0' : '127.0.0.1', port, upstream: process.env.WEB_MV_URL, timeoutMs: Number(process.env.RPC_TIMEOUT_MS ?? 30000) });
   app.start().then(() => {
     console.log(`Signature Doctor · http://127.0.0.1:${port}`);
-    console.log(app.bridge.upstream ? `Using existing web-mv relay: ${app.bridge.upstream}` : `Echo agent: ws://127.0.0.1:${port}/agent`);
+    console.log(app.bridge.upstream ? `Using existing web-mv relay: ${app.bridge.upstream}` : `Runtime agent: ws://127.0.0.1:${port}/agent`);
     if (dev) console.log('Development preview listens on all interfaces. Use npm start for a loopback-only session.');
   }).catch((error) => { console.error(`Could not start Signature Doctor: ${error.message}`); process.exitCode = 1; });
   for (const signal of ['SIGINT', 'SIGTERM']) process.once(signal, () => { app.close().then(() => process.exit(0)); });
