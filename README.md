@@ -1,25 +1,26 @@
 <p align="center">
-  <img src="docs/assets/hero.svg" alt="Ech0 — Signature Doctor. Know what survived the update." width="100%" />
+  <img src="docs/assets/hero.svg" alt="Signature Doctor — an AngelScript signature and offset maintenance workbench." width="100%" />
 </p>
 
 <p align="center">
   <a href="https://github.com/b4rzY/Signature-Doctor/actions/workflows/ci.yml"><img src="https://github.com/b4rzY/Signature-Doctor/actions/workflows/ci.yml/badge.svg" alt="Verification status" /></a>
   <img src="https://img.shields.io/badge/Node.js-22%2B-83bfa4?style=flat-square" alt="Node.js 22 or newer" />
-  <img src="https://img.shields.io/badge/Echo-Angel_API-e8b36b?style=flat-square" alt="Echo Angel API" />
+  <img src="https://img.shields.io/badge/AngelScript-host_adapter-e8b36b?style=flat-square" alt="AngelScript host adapter" />
   <img src="https://img.shields.io/badge/Target_access-read_only-98a9c7?style=flat-square" alt="Read-only target access" />
 </p>
 
 <p align="center">
-  <b>A signature and offset maintenance workbench for Echo.</b><br />
+  <b>A signature and offset maintenance workbench for AngelScript runtimes.</b><br />
   Keep a named catalog. Check a new build. Inspect the evidence. Export only what you reviewed.
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick start</a> ·
-  <a href="#connect-to-echo">Connect Echo</a> ·
+  <a href="#connect-an-angelscript-host">Connect a runtime</a> ·
   <a href="#the-workflow">Workflow</a> ·
   <a href="docs/CATALOG.md">Catalog reference</a> ·
-  <a href="docs/ARCHITECTURE.md">Architecture</a>
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/COMPATIBILITY.md">Host compatibility</a>
 </p>
 
 ---
@@ -28,7 +29,7 @@
 
 Signature Doctor turns a collection of signatures, offsets, and pointer chains into a reviewable build report. Every result carries its resolution steps, validation outcomes, and comparison against the baseline you selected.
 
-It is a **local application**. The dashboard and its Node server run on your machine. You can connect Echo directly, reuse an existing [web-mv](https://github.com/Jozkah/web-mv) relay, or explore a clearly labeled synthetic demo without a target process.
+It is a **local application**. The dashboard and its Node server run on your machine. You can connect a compatible AngelScript host through the included portable adapter, reuse an existing [web-mv](https://github.com/Jozkah/web-mv) relay, or explore a clearly labeled synthetic demo without a target process.
 
 <p align="center">
   <img src="docs/assets/dashboard-preview.svg" alt="Static interface illustration showing Signature Doctor's simulated demo workspace, build health, catalog results and a resolution inspector" width="100%" />
@@ -44,7 +45,7 @@ It is a **local application**. The dashboard and its Node server run on your mac
 | **Build comparison** | Compare against an explicitly chosen baseline while separating module relocation from changes to module offsets. |
 | **Review before export** | Approve eligible results individually. Export a reviewed JSON manifest or runtime AngelScript resolvers. |
 | **Local history** | Keep the latest 20 runs, baseline selection, and review choices in the browser. Download reports and catalog JSON. |
-| **Two live connections** | Use the included Echo connector or share web-mv's existing core-agent connection. |
+| **Two live connections** | Use the portable AngelScript connector or share an existing web-mv relay. |
 | **Working demo** | Exercise the same resolution engine through a simulated RPC target, including missing and ambiguous signatures. |
 
 ## The workflow
@@ -83,7 +84,7 @@ flowchart TD
 
 ## Quick start
 
-**Requirements:** [Node.js 22 or newer](https://nodejs.org/), npm, and a modern browser. Echo is needed only for live checks.
+**Requirements:** [Node.js 22 or newer](https://nodejs.org/), npm, and a modern browser. A compatible AngelScript host is needed only for live checks. See [host compatibility](docs/COMPATIBILITY.md) for the required bindings.
 
 ```bash
 git clone https://github.com/b4rzY/Signature-Doctor.git
@@ -98,30 +99,31 @@ The demo lets you inspect a complete workflow immediately. Its fictional `Asteri
 
 Windows users can also use **`run.bat`**. On macOS/Linux, use **`bash run.sh`**. These launchers check the Node version and install dependencies when needed.
 
-## Connect to Echo
+## Connect an AngelScript host
 
-Choose **one** connection approach. Echo's built-in process socket allows one active connection at a time.
+AngelScript is the language; process access, networking, and JSON support are supplied by the embedding application. Signature Doctor's portable connector targets a documented shared subset of those host APIs. It does not assume every AngelScript embedding has them.
 
-### A. Direct Echo connection
+### A. Portable connector
 
 1. Start Signature Doctor with `npm start`.
-2. Open [`examples/echo-connect.as`](examples/echo-connect.as) and set `PROCESS_NAME` to your target executable.
-3. Place the script in Echo's script folder and load it through your Echo loader.
-4. Use the connector's attach/connect action if needed.
-5. Switch the dashboard to **Live**, use a catalog for your target, and run **Check this build**.
+2. Choose **Connect runtime → Download connector**, or open [`examples/angelscript-connect.as`](examples/angelscript-connect.as), and set `PROCESS_NAME` to your target executable.
+3. Place the script in your host's script folder and load it through its script loader.
+4. Confirm the connector reports that it is attached and connected.
+5. In **Signature catalog**, choose **New catalog** to start with an empty catalog for your process, or **Import catalog** to load existing recipes.
+6. Select **Live** and run **Check this build**.
 
-The connector uses the current documented API:
+The adapter implements Signature Doctor's read-only request protocol using `process::`, `ws::`, and `json::`. It connects to **`ws://127.0.0.1:3210/agent`**. There is no dependency on a host's built-in process-socket API.
 
 ```cpp
-attach_data target = process::attach(PROCESS_NAME);
-process::open_socket("ws://127.0.0.1:3210/agent");
+const string PROCESS_NAME = "YourApplication.exe";
+const string RELAY_URL = "ws://127.0.0.1:3210/agent";
 ```
 
-These lines are explanatory; the complete connector includes the required `bool main()` and failure handling. The script uses the documented one-argument `process::attach` form. If your installed Echo build differs, adjust the connector to that build's API.
+These are the configuration values in the complete adapter. Keep its request handling, bounds checks, and lifecycle callbacks intact. Use one direct connector per running Signature Doctor server.
 
 ### B. Reuse web-mv
 
-If [web-mv](https://github.com/Jozkah/web-mv) already has the Echo core socket, keep it connected and route Signature Doctor through its HTTP RPC endpoint. Do not load a second core connector.
+If [web-mv](https://github.com/Jozkah/web-mv) already has a working connection to your runtime, keep that connection and route Signature Doctor through its HTTP RPC endpoint. Do not load the direct connector in this mode.
 
 **PowerShell**
 
@@ -136,7 +138,7 @@ npm start
 WEB_MV_URL=http://127.0.0.1:9000/rpc npm start
 ```
 
-The proxy accepts a configured loopback URL. This application forwards only its bounded, read-only command allowlist. web-mv's extension agent is not required for the documented resolver workflow.
+The proxy accepts a configured loopback URL. The same bounded, read-only command allowlist applies. web-mv's extension agent is not required for the resolver operations used here; compatibility still depends on its own runtime adapter.
 
 ### Connection layout
 
@@ -144,15 +146,26 @@ The proxy accepts a configured loopback URL. This application forwards only its 
 flowchart TD
     UI["Signature Doctor dashboard"] --> CORE["Local server and read-only RPC gate"]
     CORE --> MODE{"Connection mode"}
-    MODE -->|"Direct"| SOCKET["Echo process socket"]
+    MODE -->|"Portable connector"| AS["AngelScript process / JSON / WebSocket adapter"]
     MODE -->|"Existing relay"| MV["web-mv HTTP RPC"]
-    MV --> SOCKET
-    SOCKET --> TARGET["Attached target process"]
+    AS --> HOST["Compatible host APIs"]
+    MV --> HOST
+    HOST --> TARGET["Attached target process"]
 ```
+
+### Host compatibility
+
+| Target host | Connection | Basis of support | Live verification |
+| --- | --- | --- | --- |
+| **Echo** | Shared `angelscript-connect.as` adapter | Public Process, WebSocket, and JSON API documentation | Not run against a live installation |
+| **Solanius** | The same shared adapter | Supplied full host API reference, including compatible process/read/scan, WebSocket, and JSON bindings | Not run against a live installation |
+| **Other AngelScript hosts** | Implement or adapt the [connector protocol](docs/PROTOCOL.md) | Must provide the required host bindings or an equivalent bridge | Depends on the adapter |
+
+The connector deliberately avoids `process::open_socket`, which is not documented in both host profiles. The portable one-argument `process::attach(name)` call works with both documented signatures. The [compatibility guide](docs/COMPATIBILITY.md) records differences, script locations, and the remaining runtime checks.
 
 ## Create your catalog
 
-Create entries in the dashboard or import a catalog JSON file. This small example describes a signature that points to a module-resident state object:
+Choose **Signature catalog → New catalog** to create an empty project with its own name and expected process, or import a catalog JSON file. Creating or importing a catalog replaces the current browser workspace after confirmation; save the current catalog first if you want to keep it. Add entries in the dashboard. This small example describes a signature that points to a module-resident state object:
 
 ```json
 {
@@ -198,11 +211,11 @@ Generates a standalone `.as` script for a **live**, reviewed result set. The out
 - Walks pointers using success-reporting reads and rejects null pointers.
 - Repeats every configured validation and the dashboard's implicit readability check.
 - Publishes the resolved globals only after every selected entry succeeds.
-- Uses the current documented `process::attach(PROCESS_NAME)` API.
+- Uses the common documented `process::attach(PROCESS_NAME)` form.
 
 No observed heap address is embedded as a persistent runtime constant. Generated identifiers are sanitized and disambiguated. An empty selection, failed result, changed catalog, or stale item definition prevents export.
 
-**Runtime verification:** the JavaScript generator and its output contracts are covered by tests. An Echo host/AngelScript compiler is not included in this repository; compile and verify generated scripts against your installed runtime before integrating them into a larger script.
+**Runtime verification:** generated resolvers and the portable connector were compiled and exercised with the real AngelScript 2.38.0 compiler/VM using API-shaped stubs and synthetic memory. This covers source compatibility and fixture behavior. It does not verify a live host installation, native networking, or actual process access. Compile and verify exports in your installed host before integrating them into a larger script. See the [verification scope](docs/COMPATIBILITY.md#verification-scope).
 
 ## Comparison rules that matter
 
@@ -224,7 +237,15 @@ npm run dev
 
 `npm run verify` checks JavaScript syntax and runs the automated tests. `npm run dev` serves the same application for development; it listens on all interfaces for preview tooling. Use `npm start` for the normal loopback-only session.
 
-**Verification scope:** the resolver, transport, export, and interface logic have automated tests. Browser visual QA could not be performed in the build environment because its managed preview service was unavailable. The illustration above is labeled accordingly. A live Echo host and its AngelScript compiler were also unavailable.
+**Verification scope:** the resolver, transport, export, and interface logic have automated tests. Browser visual QA could not be performed in the build environment because its managed preview service was unavailable. The illustration above is labeled accordingly. Live host installations were also unavailable; host compatibility is based on documented APIs and the checks described in the [compatibility guide](docs/COMPATIBILITY.md#verification-scope).
+
+Optional compiler/VM fixtures require AngelScript SDK **2.38.0** and a GNU-compatible C++17 compiler:
+
+```bash
+npm run verify:angelscript -- --sdk /path/to/sdk
+```
+
+These use the real language compiler with synthetic host APIs. They are separate from `npm run verify`; neither the SDK nor the native compiler is needed to run the dashboard.
 
 | Area | Location |
 | --- | --- |
@@ -233,7 +254,7 @@ npm run dev
 | Simulated target | `shared/demo.mjs` |
 | Reviewed exports | `shared/export.mjs` |
 | HTTP / WebSocket transport | `server/` |
-| Echo connector | `examples/echo-connect.as` |
+| Portable AngelScript connector | `examples/angelscript-connect.as` |
 | Automated tests | `tests/` |
 
 The frontend is buildless, using native browser modules. The server has one runtime dependency, `ws`. There is no database service or external font/CDN requirement for the dashboard.
@@ -246,26 +267,26 @@ The frontend is buildless, using native browser modules. The server has one runt
 | `WEB_MV_URL` | Unset | Use a loopback web-mv RPC endpoint instead of a direct agent |
 | `RPC_TIMEOUT_MS` | `30000` | Per-request timeout |
 
-When changing `PORT` in direct mode, update the WebSocket URL in the Echo connector too.
+When changing `PORT` in direct mode, update the WebSocket URL in the AngelScript connector too.
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
-| Agent is disconnected | Start the local server first, confirm the target is running, and attach/connect the Echo script. |
-| `open_socket` fails | Echo may already be connected to web-mv or another tool. Use the existing-relay mode or close the other core socket. |
+| Agent is disconnected | Start the local server first, confirm the target is running, and attach/connect the AngelScript adapter. |
+| Direct connection fails | Check the adapter URL, server port, and whether another direct adapter is already connected. If using web-mv proxy mode, keep its adapter and do not load a second one. |
+| Runtime disconnected after a restart | Use **Connect** in the loaded adapter. Disconnects require an explicit reconnect. |
 | Every item is missing | Verify the catalog's module names against the connected target and ensure the correct executable is attached. |
 | A signature is ambiguous | Tighten the pattern or revise the recipe. The application deliberately does not guess which match is correct. |
-| Reads time out | Check Echo/relay status. Large scans may exceed the configured timeout. Keep catalogs and signatures focused. |
+| Reads time out | Check the runtime/relay status. Large scans may exceed the configured timeout. Keep catalogs and signatures focused. |
 | Export is disabled | Select a completed current run, review eligible entries, and use Live mode for AngelScript export. |
 | Imported JSON is rejected | Check `schemaVersion`, unique IDs, string-form addresses/offsets, and the [catalog limits](docs/CATALOG.md#limits). |
 
-## Acknowledgments and API references
+## References and integration credits
 
-Built for **Ech0** and the [Echo / Angel Universal API](https://echo-23.gitbook.io/angel).
-
-- [Process API and socket routes](https://echo-23.gitbook.io/angel/memory/process)
-- [Getting started and script entrypoint](https://echo-23.gitbook.io/angel)
+- [AngelScript language and embedding documentation](https://www.angelcode.com/angelscript/sdk/docs/manual/index.html)
+- [Host compatibility and API sources](docs/COMPATIBILITY.md)
+- [Connector protocol](docs/PROTOCOL.md)
 - [Jozkah / web-mv](https://github.com/Jozkah/web-mv), the companion memory-analysis workbench and optional existing relay
 
-Signature Doctor adds catalog maintenance, comparison, and reviewed exports around those documented capabilities. It does not provide live debugging, breakpoints, target-memory writes, or automatic offset repair.
+Signature Doctor adds catalog maintenance, comparison, and reviewed exports around process-inspection APIs. It does not provide live debugging, breakpoints, target-memory writes, or automatic offset repair.
