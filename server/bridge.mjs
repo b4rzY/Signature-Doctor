@@ -8,6 +8,8 @@ export class BridgeError extends Error {
 
 const MAX_ADDRESS = (1n << 64n) - 1n;
 const MAX_RESPONSE = 2 * 1024 * 1024;
+const PORTABLE_PROTOCOL = 'signature-doctor/1';
+const REQUIRED_CAPABILITIES = ['ping', 'modules', 'read', 'read_batch', 'sig_scan_ida', 'resolve_relative'];
 const invalid = (message) => { throw new BridgeError(message, 'InvalidRequest', 400); };
 
 function integer(value, name, min, max) {
@@ -101,20 +103,33 @@ async function boundedJSON(response) {
   catch { throw new BridgeError('The relay returned malformed JSON.', 'ProtocolError'); }
 }
 
-/** One native Echo socket, many independently correlated HTTP callers. */
-export class EchoBridge {
+/** One runtime agent socket, many independently correlated HTTP callers. */
+export class AgentBridge {
   constructor({ timeoutMs = 30000, upstream = null, fetchImpl = globalThis.fetch, maxPending = 32 } = {}) {
     if (!Number.isSafeInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 120000) throw new Error('timeoutMs must be an integer from 1 to 120000.');
     this.timeoutMs = timeoutMs; this.upstream = validateUpstream(upstream); this.fetchImpl = fetchImpl;
     this.maxPending = maxPending; this.pending = new Map(); this.sequence = 0; this.agent = null; this.proxyPending = 0;
-    this.proxyControllers = new Set(); this.closed = false;
+    this.proxyControllers = new Set(); this.closed = false; this.agentInfo = null;
   }
   get mode() { return this.upstream ? 'web-mv' : 'direct'; }
   get connected() { return this.agent?.readyState === WebSocket.OPEN; }
   get pendingCount() { return this.pending.size + this.proxyPending; }
 
+  recordProtocol(message) {
+    // Legacy/native web-mv agents omit metadata and remain compatible.
+    if (message.type !== 'ping_result') return;
+    if (message.protocol === undefined) { this.agentInfo = null; return; }
+    this.agentInfo = null;
+    if (message.protocol !== PORTABLE_PROTOCOL) throw new BridgeError(`Unsupported agent protocol ${String(message.protocol)}. Load the connector bundled with this version of Signature Doctor.`, 'IncompatibleProtocol', 502);
+    if (!Array.isArray(message.capabilities) || message.capabilities.length > 32 || message.capabilities.some(value => typeof value !== 'string' || value.length > 64)
+      || !REQUIRED_CAPABILITIES.every(value => message.capabilities.includes(value))) {
+      throw new BridgeError('The runtime connector does not report the required read-only capabilities. Load examples/angelscript-connect.as.', 'IncompatibleProtocol', 502);
+    }
+    this.agentInfo = { protocol: PORTABLE_PROTOCOL, connector: message.connector === 'portable-angelscript' ? message.connector : 'custom', capabilities: [...new Set(message.capabilities)] };
+  }
+
   attach(socket) {
-    if (this.closed || this.upstream || this.agent) { socket.close(1008, 'Only one direct Echo agent is permitted.'); return false; }
+    if (this.closed || this.upstream || this.agent) { socket.close(1008, 'Only one direct runtime agent is permitted.'); return false; }
     this.agent = socket;
     socket.on('message', (data, binary) => {
       if (binary) { socket.close(1003, 'Expected JSON text.'); return; }
@@ -126,12 +141,13 @@ export class EchoBridge {
       if (message.type !== entry.expectedType && message.type !== 'error') {
         entry.finish(new BridgeError(`Expected ${entry.expectedType}; received ${message.type}.`, 'ProtocolError')); return;
       }
+      try { this.recordProtocol(message); } catch (error) { entry.finish(error); return; }
       entry.finish(null, { ...message, id: entry.clientId });
     });
     const disconnected = () => {
       if (this.agent !== socket) return;
-      this.agent = null;
-      for (const entry of [...this.pending.values()]) entry.finish(new BridgeError('Echo disconnected during the request. Reconnect and run the build again.', 'Disconnected', 503));
+      this.agent = null; this.agentInfo = null;
+      for (const entry of [...this.pending.values()]) entry.finish(new BridgeError('The runtime agent disconnected during the request. Reconnect and run the build again.', 'Disconnected', 503));
     };
     socket.on('close', disconnected);
     socket.on('error', disconnected);
@@ -143,8 +159,9 @@ export class EchoBridge {
     if (this.closed) throw new BridgeError('The bridge is shutting down.', 'Disconnected', 503);
     if (signal?.aborted) throw new BridgeError('The request was cancelled.', 'Aborted', 499);
     if (this.pendingCount >= this.maxPending) throw new BridgeError('Too many pending requests. Wait for the current check to finish.', 'Busy', 429);
+    if (this.agentInfo && !this.agentInfo.capabilities.includes(request.type)) throw new BridgeError(`The connected runtime does not provide ${request.type}.`, 'UnsupportedCapability', 501);
     if (this.upstream) return this.proxy(request, signal);
-    if (!this.connected) throw new BridgeError('No Echo agent connected. Load examples/echo-connect.as or configure WEB_MV_URL.', 'Disconnected', 503);
+    if (!this.connected) throw new BridgeError('No runtime agent connected. Load examples/angelscript-connect.as or configure WEB_MV_URL.', 'Disconnected', 503);
     const id = this.sequence = this.sequence >= 2147483647 ? 1 : this.sequence + 1;
     return new Promise((resolve, reject) => {
       const abort = () => finish(new BridgeError('The request was cancelled.', 'Aborted', 499));
@@ -155,10 +172,10 @@ export class EchoBridge {
         if (error) reject(error); else resolve(result);
       };
       this.pending.set(id, { finish, clientId: request.id, expectedType: `${request.type}_result` });
-      timer = setTimeout(() => finish(new BridgeError('Echo did not reply before the request timeout.', 'Timeout', 504)), this.timeoutMs);
+      timer = setTimeout(() => finish(new BridgeError('The runtime agent did not reply before the request timeout.', 'Timeout', 504)), this.timeoutMs);
       timer.unref?.();
       signal?.addEventListener('abort', abort, { once: true });
-      this.agent.send(JSON.stringify({ ...request, id }), (error) => { if (error) finish(new BridgeError('Could not send the request to Echo.', 'Disconnected', 503)); });
+      this.agent.send(JSON.stringify({ ...request, id }), (error) => { if (error) finish(new BridgeError('Could not send the request to the runtime agent.', 'Disconnected', 503)); });
     });
   }
 
@@ -176,12 +193,13 @@ export class EchoBridge {
       if (!response.ok) throw new BridgeError(`web-mv replied with HTTP ${response.status}. Check its core agent connection.`, 'UpstreamError', response.status === 503 ? 503 : 502);
       const result = await boundedJSON(response);
       if (!result || typeof result !== 'object' || Array.isArray(result) || ![`${request.type}_result`, 'error'].includes(result.type)) throw new BridgeError('web-mv returned an unexpected RPC response.', 'ProtocolError');
+      this.recordProtocol(result);
       return { ...result, id: request.id };
     } catch (error) {
       if (error instanceof BridgeError) throw error;
       if (signal?.aborted) throw new BridgeError('The request was cancelled.', 'Aborted', 499);
       if (controller.signal.aborted) throw new BridgeError('web-mv did not reply before the request timeout.', 'Timeout', 504);
-      throw new BridgeError('Cannot reach web-mv. Start its relay and core Echo agent, then try again.', 'Disconnected', 503);
+      throw new BridgeError('Cannot reach web-mv. Start its relay and runtime agent, then try again.', 'Disconnected', 503);
     } finally {
       clearTimeout(timer); signal?.removeEventListener('abort', abort); this.proxyControllers.delete(controller); this.proxyPending--;
     }
@@ -192,16 +210,16 @@ export class EchoBridge {
     if (this.upstream) {
       const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), Math.min(2500, this.timeoutMs));
       try { const result = await this.request({ type: 'ping' }, controller.signal); agentConnected = result.type === 'ping_result'; attached = result.attached === true; }
-      catch { agentConnected = false; attached = false; }
+      catch { agentConnected = false; attached = false; this.agentInfo = null; }
       finally { clearTimeout(timer); }
     }
-    return { agentConnected, attached, mode: this.mode, upstream: this.upstream, pendingRequests: this.pendingCount, version: '1.0.0', readOnly: true };
+    return { agentConnected, attached, mode: this.mode, upstream: this.upstream, pendingRequests: this.pendingCount, version: '1.1.0', readOnly: true, protocol: this.agentInfo?.protocol ?? null, connector: this.agentInfo?.connector ?? null, capabilities: this.agentInfo?.capabilities ?? null };
   }
 
   close() {
     this.closed = true;
     for (const entry of [...this.pending.values()]) entry.finish(new BridgeError('The bridge is shutting down.', 'Disconnected', 503));
     for (const controller of this.proxyControllers) controller.abort();
-    this.agent?.terminate(); this.agent = null;
+    this.agent?.terminate(); this.agent = null; this.agentInfo = null;
   }
 }
