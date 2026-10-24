@@ -37,7 +37,7 @@ function pause(ms, signal) {
   });
 }
 
-/** A bounded sparse-memory simulator implements the same read-only wire protocol as Echo. */
+/** A bounded sparse-memory simulator implements Signature Doctor's read-only wire protocol. */
 export function createDemoRpc(scenario = 'updated', { latencyMs = 16 } = {}) {
   if (!['baseline', 'updated'].includes(scenario)) throw new Error('Unknown demo scenario');
   const updated = scenario === 'updated';
