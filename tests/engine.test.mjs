@@ -82,7 +82,7 @@ test('ambiguous and missing signatures never attempt relative resolution or read
     assert.equal(seen.find(x => x.type === 'sig_scan_ida').find_all, true);
   }
 });
-test('relative resolution uses Echo offset and inst_size fields', async () => {
+test('relative resolution uses the portable RPC offset and inst_size fields', async () => {
   const item = { id: 'item', name: 'Item', module: 'test.exe', kind: 'signature', pattern: '48 8B 05 ?? ?? ?? ??', relative: { offset: 3, instructionSize: 7 }, addend: '-0x10', checks: [] };
   const f = fixture({ item, scan: ['0xfedcba9876540100'], relativeAddress: '0xfedcba9876540080' });
   let relative;
