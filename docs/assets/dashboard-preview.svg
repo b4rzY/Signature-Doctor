@@ -26,7 +26,7 @@
 <rect x="45" y="75" width="35" height="35" rx="9" fill="#edc477" stroke="#edc477"/>
 <text x="62.5" y="102" fill="#17191b" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="32" font-weight="500" text-anchor="middle">+</text>
 <text x="92" y="88" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14" font-weight="650" >Signature Doctor</text>
-<text x="92" y="106" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" letter-spacing="2.2">BY ECH0</text>
+<text x="92" y="106" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="8" font-weight="400" letter-spacing=".8">ANGELSCRIPT WORKBENCH</text>
 <rect x="38" y="136" width="184" height="57" rx="8" fill="#1c1f22" stroke="#2a2e32"/>
 <rect x="49" y="149" width="30" height="30" rx="6" fill="#2a261e" stroke="#3d3930"/>
 <text x="55" y="169" fill="#edc477" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="13" font-weight="400" >‹ ›</text>
@@ -48,15 +48,15 @@
 <path d="M45 424H214" stroke="#23272b" />
 <text x="46" y="455" fill="#717a81" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.6">RESOURCES</text>
 <use href="#link" x="47" y="477" width="17" height="17" color="#92979d"/>
-<text x="76" y="491" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Connect Echo</text>
+<text x="76" y="491" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Connect runtime</text>
 <use href="#book" x="47" y="521" width="17" height="17" color="#92979d"/>
 <text x="76" y="535" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="400" >Documentation</text>
 <circle cx="48" cy="910" r="3" fill="#edc477"/>
 <text x="59" y="914" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >DEMO ENVIRONMENT</text>
 <text x="45" y="935" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Simulated data · no target access</text>
 <path d="M45 955H214" stroke="#2a2e32" />
-<text x="45" y="982" fill="#dfe2e2" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="15" font-weight="400" >Ech0.</text>
-<text x="214" y="982" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end">v1.0.0</text>
+<text x="45" y="982" fill="#dfe2e2" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="15" font-weight="400" >AngelScript.</text>
+<text x="214" y="982" fill="#626b73" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end">v1.1.0</text>
 <path d="M240 109H1460" stroke="#23272b" />
 <text x="274" y="83" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Workspace</text>
 <text x="350" y="83" fill="#58616a" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" font-weight="400" >›</text>
@@ -68,9 +68,9 @@
 <path d="M1256 69L1256 89" stroke="#2a2e32" />
 <rect x="1272" y="65" width="104" height="29" rx="6" fill="#191c1f" stroke="#2a2e32"/>
 <circle cx="1285" cy="79.5" r="3" fill="#626b73"/>
-<text x="1296" y="83" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Echo offline</text>
+<text x="1296" y="83" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Runtime offline</text>
 <circle cx="1410" cy="80" r="14" fill="#292d30" stroke="#3a3f44"/>
-<text x="1410" y="83" fill="#c7cacc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle">E0</text>
+<text x="1410" y="83" fill="#c7cacc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" text-anchor="middle">SD</text>
 <use href="#pulse" x="274" y="130" width="13" height="13" color="#edc477"/>
 <text x="295" y="141" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="650" letter-spacing="1.7">BUILD DIAGNOSTICS</text>
 <text x="274" y="181" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="31" font-weight="550" letter-spacing="-1.0">Every address. Accounted for.</text>
@@ -85,9 +85,9 @@
 <rect x="287" y="239" width="132" height="25" rx="5" fill="#101315" stroke="#353a3f"/>
 <rect x="290" y="242" width="48" height="19" rx="3" fill="#34312a" stroke="#34312a"/>
 <text x="314" y="255" fill="#edc477" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle">Demo</text>
-<text x="377" y="255" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle">Live Echo</text>
+<text x="377" y="255" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle">Live</text>
 <text x="433" y="256" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >Explore the workflow with</text>
-<text x="571" y="256" fill="#c0c6cb" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >simulated process data.</text>
+<text x="584" y="256" fill="#c0c6cb" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="400" >simulated process data.</text>
 <text x="1201" y="255" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Next check</text>
 <text x="1409" y="255" fill="#b4bbc1" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="10" font-weight="400" text-anchor="end">Build 1.8.3 · demo</text>
 <rect x="274" y="294" width="276" height="109" rx="8" fill="#191c1f" stroke="#2a2e32"/>
@@ -116,8 +116,8 @@
 <text x="1167" y="384" fill="#92979d" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="9" font-weight="400" >Review required · demo</text>
 <rect x="274" y="425" width="810" height="527" rx="8" fill="#191c1f" stroke="#2a2e32"/>
 <text x="293" y="451" fill="#f0f0ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" font-weight="550" >Signature catalog</text>
-<rect x="407" y="438" width="20" height="17" rx="4" fill="#191c1f" stroke="#383e43"/>
-<text x="417" y="450" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" text-anchor="middle">9</text>
+<rect x="423" y="438" width="20" height="17" rx="4" fill="#191c1f" stroke="#383e43"/>
+<text x="433" y="450" fill="#92979d" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="9" font-weight="400" text-anchor="middle">9</text>
 <text x="293" y="470" fill="#626b73" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="10" font-weight="400" >Build 1.8.3 · demo</text>
 <use href="#download" x="1046" y="441" width="16" height="16" color="#92979d"/>
 <rect x="293" y="485" width="97" height="26" rx="4" fill="#2b3034" stroke="#2b3034"/>
