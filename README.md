@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e78b90dd-e9fa-4fa9-8590-d7fbcf77de51" alt="The Doctor, Signature Doctor's hooded hacker investigator, inspecting signature bytes and memory offsets through an amber forensic lens." width="100%" />
+</p>
+
 <h1 align="center">SIGNATURE DOCTOR</h1>
 <p align="center"><b>Resolve signatures. Trace changes. Verify the evidence.</b></p>
 
