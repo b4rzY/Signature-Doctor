@@ -52,6 +52,46 @@ test('dashboard interaction flow keeps review, history, edits, and demo/live sta
       assert.equal(storage().runs.at(-1).results.filter(x=>x.status==='moved').length,1);
     });
 
+    await t.test('command search supports keyboard selection and empty results',()=>{
+      q('[data-action=commands]').dispatchEvent(new window.KeyboardEvent('keydown',{key:'k',ctrlKey:true,bubbles:true}));
+      assert.equal(q('#dialog').open,true);
+      fill('#command-search','no-such-signature');
+      assert.equal(q('.command-empty').hidden,false);
+      fill('#command-search','ViewMatrix');
+      assert.equal(window.document.querySelectorAll('.command-option:not([hidden])').length,1);
+      q('#command-search').dispatchEvent(new window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+      assert.equal(q('#dialog').open,false);
+      assert.match(q('.inspector').textContent,/ViewMatrix/);
+      click('[data-action=filter][data-filter=attention]');
+      q('[data-action=filter][data-filter=all]').focus();
+      click('[data-action=filter][data-filter=all]');
+      assert.equal(window.document.activeElement.dataset.filter,'all');
+    });
+
+    await t.test('stacked inspection and mobile navigation preserve focus',()=>{
+      window.matchMedia=()=>({matches:true});
+      window.HTMLElement.prototype.scrollIntoView=function(){};
+      click('.map-cell[data-id=view-matrix]');
+      assert.equal(window.document.activeElement.getAttribute('aria-label'),'Selected signature details');
+      click('[data-action=back-to-results]');
+      assert.equal(window.document.activeElement.dataset.id,'view-matrix');
+      click('.mobile-menu');
+      assert.equal(q('.main-wrap').hasAttribute('inert'),true);
+      assert.equal(window.document.activeElement.className,'brand');
+      q('.brand').dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+      assert.equal(q('.main-wrap').hasAttribute('inert'),false);
+      assert.equal(window.document.activeElement.getAttribute('aria-label'),'Toggle navigation');
+      click('.mobile-menu');click('[data-action=commands]');fill('#command-search','ViewMatrix');
+      q('#command-search').dispatchEvent(new window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+      assert.equal(q('.main-wrap').hasAttribute('inert'),false);
+      assert.equal(window.document.activeElement.getAttribute('aria-label'),'Selected signature details');
+      click('.mobile-menu');q('.brand').dispatchEvent(new window.KeyboardEvent('keydown',{key:'/',bubbles:true}));
+      assert.equal(q('.main-wrap').hasAttribute('inert'),false);
+      assert.equal(window.document.activeElement.id,'catalog-search');
+      click('[data-action=nav][data-tab=overview]');
+      delete window.matchMedia;
+    });
+
     await t.test('search and attention filters select the intended rows',()=>{
       fill('#catalog-search','ViewMatrix');
       assert.equal(window.document.querySelectorAll('.catalog-row').length,1);

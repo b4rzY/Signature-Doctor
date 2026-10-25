@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#080a09" />
+    <meta name="theme-color" content="#101112" />
     <meta name="description" content="Signature Doctor. A local signature and offset maintenance workbench for compatible AngelScript runtimes." />
     <title>Signature Doctor · AngelScript</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -14,6 +15,7 @@
     <div id="app"><div class="boot"><div class="brand-mark">SD</div><p>Initializing workbench…</p></div></div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <dialog id="dialog" aria-labelledby="dialog-title"></dialog>
+    <script src="/vendor/gsap.min.js" defer></script>
     <script type="module" src="/app.mjs"></script>
   </body>
 </html>

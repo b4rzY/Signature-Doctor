@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T13:32:59.8362887Z",
+  "title": "Design System: Signature Doctor",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "displayName": "Signal Lime",
+        "role": "primary",
+        "tonalRamp": [
+          "oklch(15% 0.025 130)",
+          "oklch(25% 0.045 130)",
+          "oklch(35% 0.065 130)",
+          "oklch(47% 0.08 130)",
+          "oklch(59% 0.09 130)",
+          "oklch(71% 0.075 130)",
+          "oklch(83% 0.05 130)",
+          "oklch(95% 0.015 130)"
+        ]
+      },
+      "background": {
+        "displayName": "Charcoal",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "sidebar": {
+        "displayName": "Sidebar Charcoal",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "surface": {
+        "displayName": "Graphite",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "surface-raised": {
+        "displayName": "Raised Graphite",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "border": {
+        "displayName": "Graphite Border",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "divider": {
+        "displayName": "Soft Divider",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "text": {
+        "displayName": "Soft Chalk",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "muted": {
+        "displayName": "Muted Gray",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "subtle": {
+        "displayName": "Subtle Gray",
+        "role": "neutral",
+        "tonalRamp": [
+          "oklch(15% 0.005 250)",
+          "oklch(25% 0.005 250)",
+          "oklch(35% 0.005 250)",
+          "oklch(47% 0.005 250)",
+          "oklch(59% 0.005 250)",
+          "oklch(71% 0.005 250)",
+          "oklch(83% 0.005 250)",
+          "oklch(95% 0.005 250)"
+        ]
+      },
+      "success": {
+        "displayName": "Sage",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.025 130)",
+          "oklch(25% 0.045 130)",
+          "oklch(35% 0.065 130)",
+          "oklch(47% 0.08 130)",
+          "oklch(59% 0.09 130)",
+          "oklch(71% 0.075 130)",
+          "oklch(83% 0.05 130)",
+          "oklch(95% 0.015 130)"
+        ]
+      },
+      "warning": {
+        "displayName": "Amber",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.025 80)",
+          "oklch(25% 0.045 80)",
+          "oklch(35% 0.065 80)",
+          "oklch(47% 0.08 80)",
+          "oklch(59% 0.09 80)",
+          "oklch(71% 0.075 80)",
+          "oklch(83% 0.05 80)",
+          "oklch(95% 0.015 80)"
+        ]
+      },
+      "error": {
+        "displayName": "Rose",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.025 25)",
+          "oklch(25% 0.045 25)",
+          "oklch(35% 0.065 25)",
+          "oklch(47% 0.08 25)",
+          "oklch(59% 0.09 25)",
+          "oklch(71% 0.075 25)",
+          "oklch(83% 0.05 25)",
+          "oklch(95% 0.015 25)"
+        ]
+      },
+      "ambiguity": {
+        "displayName": "Lavender",
+        "role": "secondary",
+        "tonalRamp": [
+          "oklch(15% 0.025 300)",
+          "oklch(25% 0.045 300)",
+          "oklch(35% 0.065 300)",
+          "oklch(47% 0.08 300)",
+          "oklch(59% 0.09 300)",
+          "oklch(71% 0.075 300)",
+          "oklch(83% 0.05 300)",
+          "oklch(95% 0.015 300)"
+        ]
+      }
+    },
+    "shadows": [
+      {
+        "name": "dialog",
+        "value": "0 24px 80px #0008",
+        "purpose": "Modal separation."
+      },
+      {
+        "name": "toast",
+        "value": "0 8px 35px #0006",
+        "purpose": "Transient feedback."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Shared state easing."
+      },
+      {
+        "name": "control",
+        "value": "160ms",
+        "purpose": "Button and link color transitions."
+      },
+      {
+        "name": "dialog-navigation",
+        "value": "220ms",
+        "purpose": "Dialog entrance and mobile rail."
+      },
+      {
+        "name": "toast",
+        "value": "180ms",
+        "purpose": "Feedback settle."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "700px"
+      },
+      {
+        "name": "stack-max",
+        "value": "1000px"
+      },
+      {
+        "name": "compact-max",
+        "value": "1250px"
+      },
+      {
+        "name": "wide-min",
+        "value": "1550px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Implemented action control.",
+      "html": "<button class=\"ds-button-0\">Check this build</button>",
+      "css": ".ds-button-0{background:var(--accent,#c2ee90);color:#233017;border:1px solid var(--accent,#c2ee90);font:650 11px var(--sans,Manrope,'Segoe UI',sans-serif);border-radius:7px;min-height:36px;padding:8px 13px;cursor:pointer;transition:background-color 160ms var(--ease,cubic-bezier(.16,1,.3,1)),border-color 160ms var(--ease,cubic-bezier(.16,1,.3,1))}.ds-button-0:hover{background:#d3f7ac}.ds-button-0:focus-visible{outline:2px solid var(--accent,#c2ee90);outline-offset:3px}.ds-button-0:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Implemented action control.",
+      "html": "<button class=\"ds-button-1\">Add signature</button>",
+      "css": ".ds-button-1{background:#26282a;color:var(--text,#eeeef0);border:1px solid #3b3e40;font:650 11px var(--sans,Manrope,'Segoe UI',sans-serif);border-radius:7px;min-height:36px;padding:8px 13px;cursor:pointer;transition:background-color 160ms var(--ease,cubic-bezier(.16,1,.3,1)),border-color 160ms var(--ease,cubic-bezier(.16,1,.3,1))}.ds-button-1:hover{background:#333638;border-color:#62676b}.ds-button-1:focus-visible{outline:2px solid var(--accent,#c2ee90);outline-offset:3px}.ds-button-1:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Implemented action control.",
+      "html": "<button class=\"ds-button-2\">Open catalog</button>",
+      "css": ".ds-button-2{background:transparent;color:var(--muted,#a7aaad);border:1px solid var(--line,#303234);font:650 11px var(--sans,Manrope,'Segoe UI',sans-serif);border-radius:7px;min-height:36px;padding:8px 13px;cursor:pointer;transition:background-color 160ms var(--ease,cubic-bezier(.16,1,.3,1)),border-color 160ms var(--ease,cubic-bezier(.16,1,.3,1))}.ds-button-2:hover{background:#252729;color:var(--text,#eeeef0)}.ds-button-2:focus-visible{outline:2px solid var(--accent,#c2ee90);outline-offset:3px}.ds-button-2:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Inset catalog editor field.",
+      "html": "<label class=\"ds-field\">Signature name<input aria-label=\"Signature name\" value=\"View matrix\"></label>",
+      "css": ".ds-field{display:grid;gap:6px;color:#bdc6cd;font:11px var(--sans,Manrope,'Segoe UI',sans-serif)}.ds-field input{color:var(--text,#eeeef0);background:#111315;border:1px solid #353e46;border-radius:8px;padding:9px 10px;font:inherit}.ds-field input:focus-visible{outline:2px solid var(--accent,#c2ee90);outline-offset:3px}"
+    },
+    {
+      "name": "Active Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Selected workspace destination. Mobile drawer contains focus and makes main content inert; closing restores focus.",
+      "html": "<button class=\"ds-nav\" aria-current=\"page\">Overview</button>",
+      "css": ".ds-nav{min-height:42px;padding:10px 13px;border:0;border-radius:7px;background:#293122;color:var(--accent,#c2ee90);text-align:left;font:12px var(--sans,Manrope,'Segoe UI',sans-serif);cursor:pointer}.ds-nav:hover{background:#222426;color:var(--text,#eeeef0)}.ds-nav:focus-visible{outline:2px solid var(--accent,#c2ee90);outline-offset:3px}"
+    },
+    {
+      "name": "Valid Status",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Written status with a semantic marker.",
+      "html": "<span class=\"ds-status\">Valid</span>",
+      "css": ".ds-status{display:inline-flex;align-items:center;gap:5px;border-radius:5px;padding:3px 6px;font:9px var(--sans,Manrope,'Segoe UI',sans-serif);color:var(--green,#b8dca0);background:#293326}.ds-status:before{content:'';width:4px;height:4px;background:currentColor;border-radius:50%}"
+    },
+    {
+      "name": "Evidence Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat, bordered evidence container.",
+      "html": "<section class=\"ds-panel\"><h2>Signature catalog</h2><p>Review the evidence for this build.</p></section>",
+      "css": ".ds-panel{background:var(--surface,#18191b);border:1px solid var(--line,#303234);border-radius:12px;padding:19px 18px;color:var(--text,#eeeef0);font-family:var(--sans,Manrope,'Segoe UI',sans-serif)}.ds-panel h2{font-size:12px;font-weight:650;margin:0}.ds-panel p{font-size:10px;color:var(--subtle,#96999d);margin:5px 0 0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Keep noir, elevate the craft",
+    "overview": "Keep noir, elevate the craft. A charcoal operational workbench uses quiet tonal layers, locally served Manrope, and restrained lime to make actions and selected evidence easy to find. Monospace separates addresses, patterns, deltas, and counts from interface language.\n\nThis records the implemented source in public/styles.css and public/app.mjs. Desktop and mobile browser captures are available in .impeccable/review. This document records the final source changes; the final visual review verdict is tracked separately.",
+    "keyCharacteristics": [
+      "Charcoal tonal layers.",
+      "Restrained lime actions and focus.",
+      "Manrope interface language with monospace evidence.",
+      "Dense operational layout with an adjacent inspector."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Color Rule",
+        "body": "Semantic colors must accompany a label or icon that identifies the underlying state.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data Voice Rule",
+        "body": "Use mono for machine evidence and the sans family for human instructions.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Surface Rule",
+        "body": "Use tonal layers and rules for persistent workspace depth; reserve the implemented shadows for overlays.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do reserve lime for primary actions, focus, selection, and current evidence.",
+      "Do use monospace for machine data and Manrope for interface language.",
+      "Do pair status color with a label or icon.",
+      "Do retain the reduced-motion override and visible keyboard focus."
+    ],
+    "donts": [
+      "Don't use status colors as decorative accents.",
+      "Don't present simulated data as live evidence.",
+      "Don't treat source inspection as a successful visual review."
+    ]
+  }
+}

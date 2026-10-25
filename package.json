@@ -13,12 +13,16 @@
     "test": "node --test tests/*.test.mjs",
     "check": "node scripts/check.mjs",
     "verify": "npm run check && npm test",
-    "verify:angelscript": "node scripts/verify-angelscript.mjs"
+    "verify:angelscript": "node scripts/verify-angelscript.mjs",
+    "assets:sync": "node scripts/sync-ui-assets.mjs"
   },
   "dependencies": {
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "jsdom": "^26.1.0"
+    "@fontsource-variable/manrope": "^5.3.0",
+    "gsap": "^3.15.0",
+    "jsdom": "^26.1.0",
+    "lucide-static": "^1.61.0"
   }
 }

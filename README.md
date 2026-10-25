@@ -32,12 +32,27 @@ It is a **local application**. The dashboard and its Node server run on your mac
 
 <p align="center">
   <img src="docs/assets/dashboard-noir.png" alt="Signature Doctor noir interface showing build diagnostics, signature catalog, and the ViewMatrix inspector with simulated demo data" width="100%" />
-  <br /><sub>Browser screenshot · noir workbench · simulated demo data.</sub>
+  <br /><sub>Current noir workbench · real browser capture · simulated demo data.</sub>
 </p>
 
 ### The interface
 
-Near-black surfaces, phosphor-green controls, and monospace addresses keep the workspace focused on the data. Numbered navigation connects diagnostics, catalog definitions, build history, and exports. A compact metrics strip summarizes each run; the selected signature opens beside the results with its byte pattern, resolution path, and checks. Status labels distinguish moved, missing, ambiguous, and failed results without relying on color alone.
+Charcoal surfaces, locally hosted Manrope typography, restrained lime controls, and Lucide icons define the noir workspace. A build summary explains what needs attention; the interactive signature map opens each result in the inspector. Baseline and current addresses sit beside the resolution path and validation evidence. Recent checks link directly to their retained reports.
+
+Use **Ctrl/Cmd + K** to search pages and signatures, **/** to search the catalog, and the arrow keys to move between signature names. The layout adapts to narrow screens with collapsible navigation. Scan completion and dialog transitions respect reduced-motion preferences. Status labels distinguish results without relying on color alone.
+
+On narrow screens, selecting a signature takes you straight to its evidence; **Back to results** returns to the catalog. Mobile navigation keeps keyboard focus inside the drawer.
+
+<details>
+<summary>More interface screenshots</summary>
+
+![Command search](docs/assets/command-search.png)
+
+<img src="docs/assets/mobile-inspector.png" alt="Mobile signature inspector with return to results, resolution path, and validation evidence" width="390" />
+
+</details>
+
+Visual tokens and component guidance live in [DESIGN.md](DESIGN.md).
 
 ### What you get
 
@@ -244,7 +259,7 @@ npm run dev
 
 `npm run verify` checks JavaScript syntax and runs the automated tests. `npm run dev` serves the same application for development; it listens on all interfaces for preview tooling. Use `npm start` for the normal loopback-only session.
 
-**Verification scope:** the resolver, transport, export, and interface logic have automated tests. The noir dashboard was visually inspected in a local browser; the screenshot above comes from that running application. The redesign passed all 68 automated tests. This is not an exhaustive cross-browser or mobile-device validation. Live host installations were also unavailable; host compatibility is based on documented APIs and the checks described in the [compatibility guide](docs/COMPATIBILITY.md#verification-scope).
+**Verification scope:** automated tests cover resolver, transport, exports, and interface workflows, including command search and retained keyboard focus. The redesign was inspected in a Chromium browser at desktop and 390px mobile widths, including the recipe editor, history, command search, selection/return focus, and navigation drawer. Screenshots above come from the running app. This is not exhaustive cross-browser or physical-device testing. Live host installations were unavailable; host compatibility is based on documented APIs and the checks in the [compatibility guide](docs/COMPATIBILITY.md#verification-scope).
 
 Optional compiler/VM fixtures require AngelScript SDK **2.38.0** and a GNU-compatible C++17 compiler:
 
@@ -264,7 +279,7 @@ These use the real language compiler with synthetic host APIs. They are separate
 | Portable AngelScript connector | `examples/angelscript-connect.as` |
 | Automated tests | `tests/` |
 
-The frontend is buildless, using native browser modules. The server has one runtime dependency, `ws`. There is no database service or external font/CDN requirement for the dashboard.
+The frontend is buildless, using native browser modules. Manrope, Lucide SVG paths, and GSAP are checked in under `public/`; after upgrading these development dependencies, run `npm run assets:sync` to refresh the browser assets. GSAP retains its license notice in the vendored script; font and icon licenses are included alongside their assets. The server has one runtime dependency, `ws`. There is no database service or external font/CDN requirement for the dashboard.
 
 ### Configuration
 
